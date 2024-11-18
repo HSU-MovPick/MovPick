@@ -13,6 +13,7 @@ function App() {
         <Stack.Navigator initialRouteName="Test"
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="Test" component={Test} />
+          {/* name = "Test-> 이게 컴포넌트의 주소" */}
         </Stack.Navigator>
     </NavigationContainer>
   );
