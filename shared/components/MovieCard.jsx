@@ -1,14 +1,16 @@
-import { ImageBackground, StyleSheet, Text } from 'react-native';
+import { Image, ImageBackground, StyleSheet, Text } from 'react-native';
 import MovieCardPNG from '../../assets/movie-card.png';
-export default function MovieCard({ movieTitle, movieCategory, movieReleaseDate }) {
+//포스터 안쪽 그림자, 포스터 비율 추후 구현 예정
+
+export default function MovieCard({ moviePoster, movieTitle, movieCategory, movieReleaseDate }) {
   
   return (
-    // 이미지 배경 + 텍스트 배치
     <ImageBackground 
       source={MovieCardPNG} 
       style={styles.card} // 이미지 크기와 텍스트 배치
       imageStyle={styles.imageStyle} // 이미지 자체 스타일
     >
+      <Image source={moviePoster} style={styles.moviePoster} />
       <Text style={styles.title}>{movieTitle}</Text>
       <Text style={styles.category}># {movieCategory}</Text>
       <Text style={styles.releaseDate}># {movieReleaseDate}</Text>
@@ -26,26 +28,31 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end', // 텍스트를 하단에 배치
     padding: 40, // 텍스트에 줄 여백
     transform: [{ rotate: '5deg' }], // 5도 회전
-    backgroundColor:'green',
-
   },
   imageStyle: {
     resizeMode: 'cover', // 이미지 비율 유지하며 채우기
-    backgroundColor:'blue',
+  },
+  moviePoster: { 
+    width: 170,
+    height: 230,
+    borderRadius: 20, // 테두리 굴곡
+    marginLeft:12,
+    marginBottom: 57, // 텍스트와의 간격
   },
   title: {
     fontSize: 35,
     fontWeight: 'bold',
     color: 'white',
+    // 그림자
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
-    // backgroundColor:'red',
   },
   category: {
     fontSize: 14,
     color: 'white',
     marginTop: 5,
+    //그림자
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
@@ -54,6 +61,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'white',
     marginTop: 5,
+    //그림자
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
