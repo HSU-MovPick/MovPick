@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
+import MovieCard from '../shared/components/MovieCard';
 
 export default function TestingPage() {
   return (
     <Background>
       <Container>
         <Text>테스트용 페이지</Text>
+        <MovieCard>카드</MovieCard>
       </Container>
     </Background>
   );
