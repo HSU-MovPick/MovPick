@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
-import { Image, ScrollView } from 'react-native';
+import { Image } from 'react-native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
-import { useNavigation } from '@react-navigation/native';
 
-export default function RecommendMain() {
-  const navigation = useNavigation();
+export default function EmotionRecommendMain() {
   return (
     <Background>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
       <RecommendMainLayout>
       <RecommnedFrame>
@@ -18,25 +15,10 @@ export default function RecommendMain() {
           <Emoticon source={require('../assets/emoticon1.png')} />
         </EmoticonWrapper>
         <ButtonWrapper>
-          <RecommendMainButton 
-          text="감정 분석하러 가기"
-          onPress={()=>navigation.navigate('EmotionRecommendMain')}/>
-        </ButtonWrapper>
-      </RecommnedFrame>
-
-      <RecommnedFrame>
-        <Intro>상황별 맞춤형 {'\n'}영화 추천을 경험해보세요!</Intro>
-        <EmoticonWrapper>
-          <Emoticon source={require('../assets/emoticon2.png')} />
-        </EmoticonWrapper>
-        <ButtonWrapper>
-          <RecommendMainButton 
-          text="상황별 맞춤형 추천 받기"
-          onPress={()=>navigation.navigate('SituationRecommendMain')}/>
+          <RecommendMainButton text="감정 분석하러 가기"/>
         </ButtonWrapper>
       </RecommnedFrame>
       </RecommendMainLayout>
-      </ScrollView>
     </Background>
   );
 }

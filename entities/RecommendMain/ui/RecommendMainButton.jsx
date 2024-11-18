@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { TouchableOpacity, Text } from 'react-native';
 
-export default function RecommendMainButton({text}) {
+export default function RecommendMainButton({text, onPress}) {
   return (
-    <ButtonLayout>
+    <ButtonLayout onPress={onPress}>
         <ButtonText>{text}</ButtonText>
     </ButtonLayout>
   );
 }
 
-const ButtonLayout=styled.View`
+const ButtonLayout=styled(TouchableOpacity)`
   background-color: #C73659;
   width: 300px;
   height: 60px;
