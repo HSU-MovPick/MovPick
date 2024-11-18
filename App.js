@@ -3,15 +3,16 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Test from './pages/TestingPage';
+import RecommendMain from './pages/RecommendMain';
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Test"
+        <Stack.Navigator initialRouteName="RecommendMain"
         screenOptions={{ headerShown: false, animationEnabled: false }}>
-          <Stack.Screen name="Test" component={Test} />
+          <Stack.Screen name="RecommendMain" component={RecommendMain} />
         </Stack.Navigator>
     </NavigationContainer>
   );
