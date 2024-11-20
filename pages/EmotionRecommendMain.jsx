@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
 import { Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
 
+// 감정 기반 추천 메인 페이지
 export default function EmotionRecommendMain() {
   return (
     <Background>

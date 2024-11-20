@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
 import { Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
 
-export default function EmotionRecommendMain() {
+// 상황 기반 추천 메인 페이지
+export default function SituationRecommendMain() {
+  const navigation=useNavigation();
   return (
     <Background>
 
@@ -14,7 +17,8 @@ export default function EmotionRecommendMain() {
           <Emoticon source={require('../assets/emoticon2.png')} />
         </EmoticonWrapper>
         <ButtonWrapper>
-          <RecommendMainButton text="상황별 맞춤형 추천 받기"/>
+          <RecommendMainButton text="상황별 맞춤형 추천 받기"
+          onPress={()=>navigation.navigate('SituationSelectPage')}/>
           </ButtonWrapper>
       </RecommendMainLayout>
     </Background>

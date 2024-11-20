@@ -5,6 +5,7 @@ import { Image, ScrollView } from 'react-native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
 import { useNavigation } from '@react-navigation/native';
 
+// 영화 추천 메인 페이지
 export default function RecommendMain() {
   const navigation = useNavigation();
   return (
@@ -12,6 +13,7 @@ export default function RecommendMain() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
       <RecommendMainLayout>
+
       <RecommnedFrame>
         <Intro>감정 기반 영화 추천을{'\n'}받아보세요</Intro>
         <EmoticonWrapper>
@@ -35,6 +37,7 @@ export default function RecommendMain() {
           onPress={()=>navigation.navigate('SituationRecommendMain')}/>
         </ButtonWrapper>
       </RecommnedFrame>
+
       </RecommendMainLayout>
       </ScrollView>
     </Background>
