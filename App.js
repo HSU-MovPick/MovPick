@@ -10,6 +10,7 @@ import SituationSelectPage from './pages/SituationSelectPage';
 import Login from './pages/Login'
 import Main from './pages/Main';
 import MovieList from './pages/MovieList'
+import MovieDetail from './pages/MovieDetail';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="MovieList" component={MovieList} />
+          <Stack.Screen name="MovieDetail" component={MovieDetail} />
         </Stack.Navigator>
     </NavigationContainer>
   );
