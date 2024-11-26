@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import MovPick2 from '../assets/MovPick2.png'
-import Emoticon1 from '../assets/emoticon1.png'
-import Emoticon2 from '../assets/emoticon2.png'
+import Emoticon4 from '../assets/emoticon4.png'
+import Emoticon5 from '../assets/emoticon5.png'
 import Emoticon3 from '../assets/emoticon3.png'
 import Background from '../shared/components/StandardBackground';
 
@@ -13,7 +13,7 @@ export default function Main() {
         <Background>
             <MovPickImg2 source={MovPick2} />
             <MainLayout>
-                <EmoticonImg1 source={Emoticon1} />
+                <EmoticonImg1 source={Emoticon4} />
                 <MainLayout2>
                     <Text>궁금한 영화 제목이 있나요?</Text>
                     <Text>'뭅에게 질문하기' 기능을 사용해보세요!</Text>
@@ -28,8 +28,7 @@ export default function Main() {
                     <Text>뭅이 감정에 따른 영화를 추천해드려요!</Text>
                     <Button><Text>영화 추천 받으러 가기</Text></Button>
                 </MainLayout2>
-
-                <EmoticonImg2 source={Emoticon2} />
+                <EmoticonImg2 source={Emoticon5} />
             </MainLayout>
 
             <MainLayout>
