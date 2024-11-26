@@ -1,3 +1,4 @@
+import { View, Text} from "react-native"
 import styled from "styled-components"
 import Logo from '../assets/logo.png'
 import MovPick from '../assets/MovPick.png'
