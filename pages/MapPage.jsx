@@ -3,19 +3,23 @@ import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
 import MapCard from '../shared/components/MapCard';
 import KakaoMap from './KakaoMap';
+import { StyleSheet } from 'react-native';
+
 
 // 지도 페이지 
 export default function MapPage() {
   return (
-    <Background>
-      <MapCard>
-        <KakaoMap />
-      </MapCard>
-    </Background>
+    // <Background>
+    //   <MapCard>
+    //     <KakaoMap />
+    //   </MapCard>
+    // </Background>
+    <KakaoMap />
   );
 }
 
-const Text = styled.Text`
-  font-size: 50px;
-  color: #C73659;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
