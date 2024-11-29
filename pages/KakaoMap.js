@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Alert } from 'react-native';
-import { WebView } from 'react-native-webview';
-import styled from 'styled-components/native';
+import React, { useState, useEffect } from 'react'; // React와 React Hooks import
+import { Alert } from 'react-native'; // Alert 모듈 import
+import { WebView } from 'react-native-webview'; // WebView 모듈 import
+import styled from 'styled-components/native'; // 스타일링을 위한 styled-components import
 import * as Location from 'expo-location'; // 사용자 위치 데이터를 가져오기 위한 Expo Location API import
-import KAKAO_API_KEY from '../config/keys';
+import KAKAO_API_KEY from '../config/keys'; // Kakao API 키 import
 
 // Kakao 지도 컴포넌트
 export default function KakaoMap() {
@@ -21,7 +21,7 @@ export default function KakaoMap() {
         return;
       }
 
-      // 위치 데이터 가져오기
+      // 현재 위치 데이터 가져오기
       let location = await Location.getCurrentPositionAsync({});
       // 위치 데이터를 상태에 저장
       setUserLocation({
@@ -38,7 +38,7 @@ export default function KakaoMap() {
         <!DOCTYPE html>
         <html>
         <head>
-          <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}"></script>
+          <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&libraries=services"></script>
           <style>
             #map { width: 100%; height: 100%; }
             body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
@@ -54,6 +54,44 @@ export default function KakaoMap() {
                 level: 3
               };
               var map = new kakao.maps.Map(mapContainer, mapOption);
+
+              // 현재 위치 마커 표시
+              var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(${userLocation.latitude}, ${userLocation.longitude}),
+                title: '현재 위치'
+              });
+
+              var ps = new kakao.maps.services.Places();
+              var brands = ['CGV', '롯데시네마', '메가박스'];
+
+              // 각 브랜드별 장소 검색
+              brands.forEach(function(brand) {
+                ps.keywordSearch(brand, function(data, status) {
+                  if (status === kakao.maps.services.Status.OK) {
+                    data.forEach(function(place) {
+                      var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: new kakao.maps.LatLng(place.y, place.x),
+                        title: place.place_name
+                      });
+
+                      var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="padding:5px;">' + place.place_name + '</div>'
+                      });
+
+                      kakao.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map, marker);
+                      });
+                    });
+                  } else {
+                    console.error('Places Search Failed:', status);
+                  }
+                }, {
+                  location: new kakao.maps.LatLng(${userLocation.latitude}, ${userLocation.longitude}),
+                  radius: 5000
+                });
+              });
             } catch (error) {
               document.body.innerHTML = '<p style="color:red;">Error: ' + error.message + '</p>';
             }
@@ -61,16 +99,14 @@ export default function KakaoMap() {
         </body>
         </html>
       `;
-      setHtml(mapHtml); // 생성된 HTML을 상태에 저장
+      setHtml(mapHtml);
     }
   }, [userLocation]); // userLocation 상태가 변경될 때마다 실행
 
-  // 사용자 위치를 아직 가져오지 못한 경우 빈 화면 표시
   if (!userLocation) {
-    return null; // 위치 정보를 가져오기 전에는 빈 화면 // 아무것도 렌더링하지 않음
+    return null; // 위치 정보를 가져오기 전에는 빈 화면 표시
   }
 
-  // WebView를 통해 Kakao 지도를 렌더링
   return (
     <MapContainer>
       <WebView
@@ -86,9 +122,9 @@ export default function KakaoMap() {
 
 // 스타일링: 지도 컨테이너
 const MapContainer = styled.View`
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  overflow: hidden;
+  flex: 1; /* 화면 전체를 차지 */
+  width: 100%; /* 너비 100% */
+  height: 100%; /* 높이 100% */
+  border-radius: 10px; /* 둥근 모서리 */
+  overflow: hidden; /* 컨테이너 밖의 내용 숨김 */
 `;
