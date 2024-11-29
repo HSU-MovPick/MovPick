@@ -11,13 +11,15 @@ import Login from './pages/Login';
 import Main from './pages/Main';
 import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
+import MapPage from './pages/MapPage';
+import MapTest from './pages/MapTest';
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login"
+        <Stack.Navigator initialRouteName="MapTest"
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="RecommendMain" component={RecommendMain} />
           <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
@@ -28,6 +30,8 @@ function App() {
           <Stack.Screen name="MovieList" component={MovieList} />
           <Stack.Screen name="MovieDetail" component={MovieDetail} />
           <Stack.Screen name="Test" component={Test} />
+          <Stack.Screen name="MapPage" component={MapPage} />
+          <Stack.Screen name="MapTest" component={MapTest} />
         </Stack.Navigator>
     </NavigationContainer>
   );
