@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="MapPage"
+        <Stack.Navigator initialRouteName="Login"
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="RecommendMain" component={RecommendMain} />
           <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
