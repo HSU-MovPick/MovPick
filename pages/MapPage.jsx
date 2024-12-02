@@ -1,25 +1,34 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import Background from '../shared/components/StandardBackground';
-import MapCard from '../shared/components/MapCard';
-import KakaoMap from './KakaoMap';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
-
-// 지도 페이지 
 export default function MapPage() {
   return (
-    // <Background>
-    //   <MapCard>
-    //     <KakaoMap />
-    //   </MapCard>
-    // </Background>
-    <KakaoMap />
+    <View style={styles.container}>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 37.7749,
+          longitude: -122.4194,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      >
+        <Marker
+          coordinate={{ latitude: 37.7749, longitude: -122.4194 }}
+          title="San Francisco"
+          description="This is a marker in San Francisco"
+        />
+      </MapView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject, // 지도가 화면 전체를 차지하도록 설정
   },
 });
