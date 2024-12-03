@@ -25,7 +25,7 @@ function App() {
           <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
           <Stack.Screen name="SituationRecommendMain" component={SituationRecommendMain}/>
           <Stack.Screen name="SituationSelectPage" component={SituationSelectPage} />
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="MovieList" component={MovieList} />
           <Stack.Screen name="MovieDetail" component={MovieDetail} />
