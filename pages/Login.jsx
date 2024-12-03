@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Alert } from "react-native";
 import { WebView } from "react-native-webview";
 import styled from "styled-components";
@@ -7,13 +7,15 @@ import MovPick from "../assets/MovPick.png";
 import KakaoLogo from "../assets/kakaologo.png";
 import MainTicket from "../assets/mainticket.png";
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const REST_API_KEY = "40a65c421ba8c4f7e8fed8a8937e3c77";
-const REDIRECT_URI = "https://movpick.com/oauth";
+const REDIRECT_URI = "https://movpick.com/oauth"; // 리디렉션 URI
 
 export default function Login({ navigation }) {
     const [currentUrl, setCurrentUrl] = useState(null);
 
+    // 로그인 버튼 클릭 시 카카오 로그인 URL 생성
     const onPressButton = () => {
         console.log("Button pressed!");
         setCurrentUrl(
@@ -21,59 +23,106 @@ export default function Login({ navigation }) {
         );
     };
 
+    // 인증 코드 받아서 토큰 요청 후 사용자 정보 가져오기
     const sendCodeToBackend = async (code) => {
         console.log("Sending Authorization Code to backend...");
         try {
-            const response = await axios.post("https://your-backend-url.com/kakao-login", {
-                code: code,
-                redirect_uri: REDIRECT_URI,
-                client_id: REST_API_KEY,
+            // 카카오 서버에 토큰 요청
+            const response = await axios.post("https://kauth.kakao.com/oauth/token", null, {
+                params: {
+                    grant_type: "authorization_code",
+                    client_id: REST_API_KEY,
+                    redirect_uri: REDIRECT_URI,
+                    code: code,
+                },
             });
 
-            if (response.status === 200) {
-                console.log("Backend Response:", response.data);
-                Alert.alert("Login Success", `Welcome, ${response.data.nickname}!`);
-                navigation.navigate("Main");
-            } else {
-                console.error("Backend Error:", response.status, response.data);
-                Alert.alert("Login Failed", "Something went wrong. Please try again.");
-            }
+            const { access_token } = response.data;
+
+            // 카카오 API로 사용자 정보 요청
+            const userResponse = await axios.get("https://kapi.kakao.com/v2/user/me", {
+                headers: {
+                    Authorization: `Bearer ${access_token}`,
+                },
+            });
+
+            console.log("User Info:", userResponse.data);
+
+            // 사용자 정보와 토큰을 AsyncStorage에 저장
+            await AsyncStorage.setItem('kakao_token', access_token);
+            await AsyncStorage.setItem('user_info', JSON.stringify(userResponse.data));
+
+            // 성공적으로 로그인 후 메인 페이지로 이동
+            Alert.alert("Login Success", "Welcome to the app!");
+            navigation.navigate("Main");
         } catch (error) {
-            console.error("Network Error:", error);
-            Alert.alert("Network Error", "Failed to communicate with the server.");
+            console.error("Login failed:", error);
+            Alert.alert("Login Failed", "Something went wrong. Please try again.");
         }
     };
+
+    const onShouldStartLoadWithRequest = (request) => {
+        console.log("Requested URL:", request.url);
+        if (request.url.startsWith(REDIRECT_URI)) {
+            const code = new URL(request.url).searchParams.get("code");
+            if (code) {
+                sendCodeToBackend(code); // 인증 코드 백엔드로 전송
+            } else {
+                const error = new URL(request.url).searchParams.get("error");
+                if (error) {
+                    Alert.alert("Login Error", "Something went wrong: " + error);
+                }
+            }
+            setCurrentUrl(null); // WebView 종료
+        }
+        return true;
+    };
+
+    // WebView에서 URL 변경 시 동작
+    const onNavigationStateChange = (navState) => {
+        const { url } = navState;
+        console.log("Requested URL:", url);
+        // 리디렉션된 URL에서 인증 코드를 추출
+        if (url.startsWith(REDIRECT_URI)) {
+            const code = new URL(url).searchParams.get("code");
+            if (code) {
+                sendCodeToBackend(code);  // 인증 코드 백엔드로 전송
+            }
+            setCurrentUrl(null); // WebView 종료
+        }
+    };
+
+    useEffect(() => {
+        const checkAsyncStorage = async () => {
+            try {
+                const keys = await AsyncStorage.getAllKeys(); // 모든 키 가져오기
+                const values = await AsyncStorage.multiGet(keys); // 키에 해당하는 값 가져오기
+                console.log("AsyncStorage Data:", values); // 데이터 출력
+            } catch (error) {
+                console.error("Failed to fetch AsyncStorage data:", error);
+            }
+        };
+
+        checkAsyncStorage();
+    }, []);
 
     if (currentUrl) {
         return (
             <View style={{ flex: 1 }}>
                 <WebView
-                    source={{
-                        uri: currentUrl,
-                    }}
-                    javaScriptEnabled={true}
-                    domStorageEnabled={true}
-                    sharedCookiesEnabled={true}
-                    useWebKit={true}
-                    onNavigationStateChange={(navState) => {
-                        const { url } = navState;
-                        console.log("Current URL:", url);
-
-                        if (url.startsWith(REDIRECT_URI)) {
-                            console.log("Redirected URL:", url);
-                            const code = new URL(url).searchParams.get("code");
-                            if (code) {
-                                console.log("Authorization Code:", code);
-                                sendCodeToBackend(code);
-                            }
-                            setCurrentUrl(null); // WebView 종료
-                        }
-                    }}
+                    key={currentUrl}
+                    source={{ uri: currentUrl }}
+                    javaScriptEnabled={true}  // 자바스크립트 활성화
+                    domStorageEnabled={true}  // 로컬 스토리지 활성화
+                    sharedCookiesEnabled={true} // 쿠키 공유 허용
+                    useWebKit={true}  // WebKit 사용 안 함 (일부 환경에서 문제를 일으킬 수 있음)
+                    onNavigationStateChange={onNavigationStateChange}
                     onError={(syntheticEvent) => {
                         const { nativeEvent } = syntheticEvent;
                         console.error("WebView Error:", nativeEvent);
                         Alert.alert("WebView Error", nativeEvent.description);
                     }}
+                    onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
                 />
             </View>
         );
@@ -83,12 +132,10 @@ export default function Login({ navigation }) {
         <MainLayout>
             <MovPickImg source={MovPick} />
             <LogoImg source={Logo} />
-
             <KakaoLoginButton onPress={onPressButton}>
                 <KakaoLogoImg source={KakaoLogo} />
                 <StyledText>카카오 로그인</StyledText>
             </KakaoLoginButton>
-
             <MainTicketImg source={MainTicket} />
         </MainLayout>
     );
