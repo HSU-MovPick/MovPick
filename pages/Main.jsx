@@ -46,7 +46,7 @@ export default function Main() {
 const MovPickImg2 = styled.Image`
 width : 320px;
 height : 80px;
-margin-bottom : 20px;
+margin-bottom : 2px;
 `
 const EmoticonImg1 = styled.Image`
 width : 121px;

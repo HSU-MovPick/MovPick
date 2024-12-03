@@ -42,22 +42,20 @@ const render = (status) => {
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="MapPage"
-        screenOptions={{ headerShown: false, animationEnabled: false }}
-      >
-        <Stack.Screen name="RecommendMain" component={RecommendMain} />
-        <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
-        <Stack.Screen name="SituationRecommendMain" component={SituationRecommendMain} />
-        <Stack.Screen name="SituationSelectPage" component={SituationSelectPage} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="MovieList" component={MovieList} />
-        <Stack.Screen name="MovieDetail" component={MovieDetail} />
-        <Stack.Screen name="Test" component={Test} />
-        <Stack.Screen name="MapPage" component={MapPage} />
-        <Stack.Screen name="MapTest" component={MapTest} />
-      </Stack.Navigator>
+        <Stack.Navigator initialRouteName="Login"
+        screenOptions={{ headerShown: false, animationEnabled: false }}>
+          <Stack.Screen name="RecommendMain" component={RecommendMain} />
+          <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
+          <Stack.Screen name="SituationRecommendMain" component={SituationRecommendMain}/>
+          <Stack.Screen name="SituationSelectPage" component={SituationSelectPage} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Main" component={Main} />
+          <Stack.Screen name="MovieList" component={MovieList} />
+          <Stack.Screen name="MovieDetail" component={MovieDetail} />
+          <Stack.Screen name="Test" component={Test} />
+          <Stack.Screen name="MapPage" component={MapPage} />
+          <Stack.Screen name="MapTest" component={MapTest} />
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }
