@@ -1,5 +1,8 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+# env
+.env
+
 # dependencies
 node_modules/
 
@@ -79,3 +82,5 @@ yarn-error.*
 
 # API Key Configuration
 config/
+
+config/openai-api-keys.js

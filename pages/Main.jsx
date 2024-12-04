@@ -29,7 +29,8 @@ export default function Main() {
                 <MainLayout2>
                     <Text>어떤 영화를 봐야할지 모르겠나요?</Text>
                     <Text>뭅이 감정에 따른 영화를 추천해드려요!</Text>
-                    <Button><Text>영화 추천 받으러 가기</Text></Button>
+                    <Button onPress={()=> navigation.navigate('RecommendMain')}>
+                        <Text>영화 추천 받으러 가기</Text></Button>
                 </MainLayout2>
                 <EmoticonImg2 source={Emoticon5} />
             </MainLayout>
@@ -39,7 +40,7 @@ export default function Main() {
                 <MainLayout2>
                     <Text>근처 영화관 정보가 궁금하신가요?</Text>
                     <Text>뭅에게 맡겨주세요~</Text>
-                    <Button><Text>근처 영화관 보러 가기</Text></Button>
+                    <Button onPress={()=> navigation.navigate('MapPage')}><Text>근처 영화관 보러 가기</Text></Button>
                 </MainLayout2>
             </MainLayout>
         </Background>
