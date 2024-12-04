@@ -11,6 +11,7 @@ export default function WelcomeMessage() {
 
 const styles = StyleSheet.create({
   container: {
+    marginBlockStart:-50,
     width: 330,
     height: 120,
     // flex: 1, -> 이걸 없애줘야 명시적 width, height가 먹힘
