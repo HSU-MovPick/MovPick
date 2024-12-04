@@ -2,7 +2,7 @@ import { Image, ImageBackground, StyleSheet, Text } from 'react-native';
 import MovieCardPNG from '../../assets/movie-card.png';
 //포스터 안쪽 그림자, 포스터 비율 추후 구현 예정
 
-export default function MovieCard({ moviePoster, movieTitle, movieCategory, movieReleaseDate }) {
+export default function StandardMovieCard({ moviePoster, movieTitle, movieCategory, movieReleaseDate }) {
   
   return (
     <ImageBackground 
