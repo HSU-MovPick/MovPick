@@ -19,7 +19,7 @@ export default function Main() {
                 <MainLayout2>
                     <Text>궁금한 영화 제목이 있나요?</Text>
                     <Text>'뭅에게 질문하기' 기능을 사용해보세요!</Text>
-                    <Button onPress={() => navigation.navigate('ChatbotPage')}>
+                    <Button onPress={() => navigation.navigate('ChatbotWelcomePage')}>
                         <ButtonText>챗봇 페이지로 이동</ButtonText>
                     </Button>
                 </MainLayout2>

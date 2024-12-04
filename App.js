@@ -12,8 +12,9 @@ import Main from './pages/Main';
 import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
 import MapPage from './pages/MapPage';
-import ChatbotPage from './pages/ChatbotPage';
-// import FooterNavigationBar from './shared/components/FooterNavigationBar';
+import ChatbotWelcomePage from './pages/ChatbotWelcomePage';
+import ChatbotResultPage from './pages/ChatbotResultPage';
+import ChatbotChattingPage from './pages/ChatbotChattingPage';
 
 // Google Maps Wrapper는 React Native에서 사용할 수 없음
 
@@ -57,7 +58,9 @@ function App() {
           <Stack.Screen name="MovieDetail" component={MovieDetail} />
           <Stack.Screen name="Test" component={Test} />
           <Stack.Screen name="MapPage" component={MapPage} />
-          <Stack.Screen name="ChatbotPage" component={ChatbotPage} />
+          <Stack.Screen name="ChatbotWelcomePage" component={ChatbotWelcomePage} />
+          <Stack.Screen name="ChatbotResultPage" component={ChatbotResultPage} />
+          <Stack.Screen name="ChatbotChattingPage" component={ChatbotChattingPage} />
         </Stack.Navigator>
     </NavigationContainer>
   );
