@@ -12,7 +12,8 @@ import Main from './pages/Main';
 import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
 import MapPage from './pages/MapPage';
-import ChatbotWelcomePage from './pages/ChatbotWelcomePage';
+import ChatbotPage from './pages/ChatbotPage';
+// import FooterNavigationBar from './shared/components/FooterNavigationBar';
 
 // Google Maps Wrapper는 React Native에서 사용할 수 없음
 
