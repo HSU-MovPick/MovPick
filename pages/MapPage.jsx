@@ -77,6 +77,13 @@ export default function MapPage() {
           longitudeDelta: 0.06,
         });
 
+        // 역지오코딩을 통해 주소 가져오기
+        const [geocodeAddress] = await Location.reverseGeocodeAsync(coords);
+        console.log('Reverse geocoded address: ', geocodeAddress);
+
+        const formattedAddress = `${geocodeAddress.city || ''} ${geocodeAddress.street || ''}`;
+        setAddress(formattedAddress || 'Unknown location');
+
         await fetchCinemas(coords); // 초기 영화관 데이터
       } catch (error) {
         console.error('Error fetching initial location:', error.message);
@@ -135,7 +142,7 @@ export default function MapPage() {
         {/* 현재 위치 마커 */}
         <Marker
           coordinate={location}
-          title="현재 위치"
+          title={address}
           description={"저는 여기 있어요!"}
           anchor={{ x: 0.5, y: 0.5 }} // 마커 기준점을 조정
         >
