@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, StyleSheet, ActivityIndicator, Text, Image } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Text, Image, Modal, TouchableOpacity, FlatList } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import axios from 'axios';
 import { GOOGLE_API_KEY } from '../config/keys'; // Google Maps API 키 파일
+import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
 export default function MapPage() {
   const [location, setLocation] = useState(null); // 사용자 위치 상태
@@ -13,6 +14,26 @@ export default function MapPage() {
   const [region, setRegion] = useState(null); // 현재 지도 영역
   const [address, setAddress] = useState(''); // 현재 위치 주소
   const isFetching = useRef(false); // 데이터를 가져오는 중인지 추적
+  const [selectedCinema, setSelectedCinema] = useState(null); // 선택된 영화관 영화 데이터
+  const [modalVisible, setModalVisible] = useState(false); // 모달 상태
+
+
+  // 가데이터: 영화관별 영화 목록
+  const cinemaData = {
+    cinema11: [
+      { id: "movie1", title: "Example Movie 1", showtimes: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { id: "movie2", title: "Example Movie 2", showtimes: ["1:00 PM", "4:00 PM", "7:00 PM"] }
+    ],
+    cinema4: [
+      { id: "movie3", title: "Another Movie", showtimes: ["10:00 AM", "1:30 PM", "5:00 PM"] }
+    ],
+    cinema13: [
+      { id: "movie1", title: "Example Movie 1", showtimes: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { id: "movie2", title: "Example Movie 2", showtimes: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { id: "movie3", title: "Another Movie", showtimes: ["10:00 AM", "1:30 PM", "5:00 PM"] }
+    ]
+  };
+  
 
   const fetchCinemas = async (coords) => {
     try {
@@ -32,6 +53,8 @@ export default function MapPage() {
             },
           }
         );
+
+        console.log(`Cinemas for brand ${brand}:`, response.data.results); // 응답 데이터 출력
         return response.data.results;
       };
 
@@ -127,55 +150,103 @@ export default function MapPage() {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: 0.06,
-          longitudeDelta: 0.06,
-        }}
-        showsUserLocation={true} // 현재 위치를 기본 마커로 표시
-      >
-        {/* 현재 위치 마커 */}
-        <Marker
-          coordinate={location}
-          title={address}
-          description={"저는 여기 있어요!"}
-          anchor={{ x: 0.5, y: 0.5 }} // 마커 기준점을 조정
-        >
-          <Image
-            source={require('../assets/mapicon.jpg')} // 로컬 이미지 경로
-            style={{
-              width: 40, // 너비 조정
-              height: 40, // 높이 조정
-              transform: [{ translateY: -25 }], // 이미지 상단으로 이동
-            }}
-            resizeMode="contain" // 이미지 비율 유지
-          />
-        </Marker>
+  // 마커 클릭 이벤트 핸들러
+  const onMarkerPress = (placeId) => {
+    console.log("Clicked place_id:", placeId); // 디버깅용 로그
+    const movies = cinemaData[placeId] || []; // place_id로 데이터 매핑
+    console.log("Movies fetched:", movies); // 연결된 데이터 확인
+    setSelectedCinema(movies);
+    setModalVisible(true); // 모달 열기
+  };  
 
-        {/* 영화관 마커 */}
-        {cinemas.map((cinema, index) => {
-          if (!cinema.geometry || !cinema.geometry.location) {
-            return null;
-          }
-          return (
-            <Marker
-              key={index}
-              coordinate={{
-                latitude: cinema.geometry.location.lat,
-                longitude: cinema.geometry.location.lng,
+  return (
+    <>
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.06,
+            longitudeDelta: 0.06,
+          }}
+          showsUserLocation={true} // 현재 위치를 기본 마커로 표시
+        >
+          {/* 현재 위치 마커 */}
+          <Marker
+            coordinate={location}
+            title={address}
+            description={"저는 여기 있어요!"}
+            anchor={{ x: 0.5, y: 0.5 }} // 마커 기준점을 조정
+          >
+            <Image
+              source={require('../assets/mapicon.jpg')} // 로컬 이미지 경로
+              style={{
+                width: 40, // 너비 조정
+                height: 40, // 높이 조정
+                transform: [{ translateY: -25 }], // 이미지 상단으로 이동
               }}
-              title={cinema.name}
-              description={cinema.vicinity}
+              resizeMode="contain" // 이미지 비율 유지
             />
-          );
-        })}
-      </MapView>
-    </View>
+          </Marker>
+
+          {/* 영화관 마커 */}
+          {cinemas.map((cinema, index) => {
+            if (!cinema.geometry || !cinema.geometry.location) {
+              return null;
+            }
+            return (
+              <Marker
+                key={index}
+                coordinate={{
+                  latitude: cinema.geometry.location.lat,
+                  longitude: cinema.geometry.location.lng,
+                }}
+                title={cinema.name}
+                description={cinema.vicinity}
+                onPress={() => onMarkerPress(`cinema${index + 1}`)} // 마커 클릭 핸들러 연결
+              />
+            );
+          })}
+        </MapView>
+      </View>
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Movies Playing</Text>
+          {selectedCinema && selectedCinema.length > 0 ? (
+            <FlatList
+              data={selectedCinema}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <View style={styles.movieItem}>
+                  <Text style={styles.movieTitle}>{item.title}</Text>
+                  <Text style={styles.showtimes}>
+                    {item.showtimes.join(", ")}
+                  </Text>
+                </View>
+              )}
+            />
+          ) : (
+            <Text>No movies available for this cinema.</Text>
+          )}
+
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => setModalVisible(false)}
+          >
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      {/* 하단 네비게이션 바 푸터 */}
+      <FooterNavigationBar />
+    </>
   );
 }
 
@@ -200,4 +271,43 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'red', // 오류 메시지 색상
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.7)",
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 20,
+  },
+  movieItem: {
+    marginVertical: 10,
+    padding: 15,
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    width: "90%",
+  },
+  movieTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  showtimes: {
+    fontSize: 14,
+    color: "#555",
+  },
+  closeButton: {
+    position: "absolute", // 위치를 고정
+    bottom: 40, // 화면 하단에서 위로 20px 위치
+    alignSelf: "center", // 수평 가운데 정렬
+    padding: 10,
+    backgroundColor: "#C73659",
+    borderRadius: 5,
+  },  
+  closeButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  }
 });
