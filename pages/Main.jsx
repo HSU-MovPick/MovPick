@@ -17,9 +17,10 @@ export default function Main() {
                 <MainLayout2>
                     <Text>궁금한 영화 제목이 있나요?</Text>
                     <Text>'뭅에게 질문하기' 기능을 사용해보세요!</Text>
-                    <Button><Text>영화 제목 찾으러 가기</Text></Button>
+                    <Button onPress={() => navigation.navigate('ChatbotPage')}>
+                        <ButtonText>챗봇 페이지로 이동</ButtonText>
+                    </Button>
                 </MainLayout2>
-
             </MainLayout>
 
             <MainLayout>
@@ -95,3 +96,8 @@ const Text = styled.Text`
 color : white;
 font-weight : 700;
 `
+const ButtonText = styled.Text`
+  color: #FFFFFF; 
+  font-size: 14px; 
+  font-weight: bold; 
+`;
