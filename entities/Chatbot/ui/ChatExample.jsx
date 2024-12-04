@@ -14,7 +14,7 @@ export default function ChatExample() {
 const styles = StyleSheet.create({
     container: {
       width:300,
-      height:530,
+      height:480,
       justifyContent: 'center', // 세로축 중앙 정렬
       alignItems: 'center',    // 가로축 중앙 정렬
     },

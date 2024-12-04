@@ -5,6 +5,7 @@ import StandardBackground from "../shared/components/StandardBackground"
 import WelcomeMessage from "../entities/Chatbot/ui/WelcomeMessage";
 import ChatExample from "../entities/Chatbot/ui/ChatExample";
 import QuestionButton from "../entities/Chatbot/ui/QuestionButton"
+import { useNavigation } from "@react-navigation/native"; // Navigation hook
 
 // 더미 데이터
 const moviePoster = "https://via.placeholder.com/150";
@@ -14,6 +15,8 @@ const movieReleaseDate = "2024-12-10";
 
 // 질문화면 - 초기화면r
 export default function ChatbotWelcomePage() {
+  const navigation = useNavigation(); // Navigation hook 사용
+
   return (
     <>
       <StandardBackground>
@@ -23,9 +26,10 @@ export default function ChatbotWelcomePage() {
           {/* 채팅 예시 */}
           <ChatExample></ChatExample>
           {/* 질문하러 가기 버튼 */}
-          <ButtonContainer>
-            <QuestionButton text='보러가기'/>
-          </ButtonContainer>
+          <QuestionButton 
+              text="질문하러 가기" 
+              onPress={() => navigation.navigate("ChatbotChattingPage")} 
+            />
         </Container>
       </StandardBackground>
 
