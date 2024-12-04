@@ -10,16 +10,22 @@ export default function SituationRecommendMain() {
   const navigation=useNavigation();
   return (
     <Background>
-
+      {/* 추천 메인 레이아웃 */}
       <RecommendMainLayout>
-      <Intro>상황별 맞춤형 {'\n'}영화 추천을 경험해보세요!</Intro>
+        {/* 인트로 */}
+        <Intro>상황별 맞춤형 {'\n'}영화 추천을 경험해보세요!</Intro>
+
+        {/* 이모티콘 영역 */}
         <EmoticonWrapper>
+          {/* 이모티콘 */}
           <Emoticon source={require('../assets/emoticon2.png')} />
         </EmoticonWrapper>
+
+        {/* 버튼 영역 */}
         <ButtonWrapper>
-          <RecommendMainButton text="상황별 맞춤형 추천 받기"
-          onPress={()=>navigation.navigate('SituationSelectPage')}/>
-          </ButtonWrapper>
+          {/* 버튼 */}
+          <RecommendMainButton text="상황별 맞춤형 추천 받기" onPress={()=>navigation.navigate('SituationSelectPage')}/>
+        </ButtonWrapper>
       </RecommendMainLayout>
     </Background>
   );

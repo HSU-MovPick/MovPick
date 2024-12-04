@@ -9,17 +9,25 @@ import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButto
 export default function EmotionRecommendMain() {
   return (
     <Background>
-
+      {/* 감정 추천 메인 레이아웃 */}
       <RecommendMainLayout>
-      <RecommnedFrame>
-        <Intro>감정 기반 영화 추천을{'\n'}받아보세요</Intro>
-        <EmoticonWrapper>
-          <Emoticon source={require('../assets/emoticon1.png')} />
-        </EmoticonWrapper>
-        <ButtonWrapper>
-          <RecommendMainButton text="감정 분석하러 가기"/>
-        </ButtonWrapper>
-      </RecommnedFrame>
+        {/* 감정 추천 영역 */}
+        <RecommnedFrame>
+          {/* 인트로 */}
+          <Intro>감정 기반 영화 추천을{'\n'}받아보세요</Intro>
+
+          {/* 이모티콘 영역 */}
+          <EmoticonWrapper>
+            {/* 이모티콘 */}
+            <Emoticon source={require('../assets/emoticon1.png')} />
+          </EmoticonWrapper>
+
+          {/* 버튼 영역 */}
+          <ButtonWrapper>
+            {/* 버튼 */}
+            <RecommendMainButton text="감정 분석하러 가기"/>
+          </ButtonWrapper>
+        </RecommnedFrame>
       </RecommendMainLayout>
     </Background>
   );

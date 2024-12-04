@@ -11,33 +11,42 @@ export default function RecommendMain() {
   return (
     <Background>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
+       {/* 추천 메인 레이아웃 */}
       <RecommendMainLayout>
+        {/* 감정 추천 틀 */}
+        <RecommnedFrame>
+          {/* 인트로 */}
+          <Intro>감정 기반 영화 추천을{'\n'}받아보세요</Intro>
 
-      <RecommnedFrame>
-        <Intro>감정 기반 영화 추천을{'\n'}받아보세요</Intro>
-        <EmoticonWrapper>
-          <Emoticon source={require('../assets/emoticon1.png')} />
-        </EmoticonWrapper>
-        <ButtonWrapper>
-          <RecommendMainButton 
-          text="감정 분석하러 가기"
-          onPress={()=>navigation.navigate('EmotionRecommendMain')}/>
-        </ButtonWrapper>
-      </RecommnedFrame>
+          {/* 이모티콘 영역 */}
+          <EmoticonWrapper>
+            {/* 이모티콘 */}
+            <Emoticon source={require('../assets/emoticon1.png')} />
+          </EmoticonWrapper>
 
-      <RecommnedFrame>
-        <Intro>상황별 맞춤형 {'\n'}영화 추천을 경험해보세요!</Intro>
-        <EmoticonWrapper>
-          <Emoticon source={require('../assets/emoticon2.png')} />
-        </EmoticonWrapper>
-        <ButtonWrapper>
-          <RecommendMainButton 
-          text="상황별 맞춤형 추천 받기"
-          onPress={()=>navigation.navigate('SituationRecommendMain')}/>
-        </ButtonWrapper>
-      </RecommnedFrame>
+          {/* 버튼 영역 */}
+          <ButtonWrapper>
+            {/* 버튼 */}
+            <RecommendMainButton text="감정 분석하러 가기" onPress={()=>navigation.navigate('EmotionRecommendMain')}/>
+          </ButtonWrapper>
+        </RecommnedFrame>
 
+        {/* 상황별 맞춤 추천 틀 */}
+        <RecommnedFrame>
+          {/* 인트로 */}
+          <Intro>상황별 맞춤형 {'\n'}영화 추천을 경험해보세요!</Intro>
+          {/* 이모티콘 영역 */}
+          <EmoticonWrapper>
+            {/* 이모티콘 */}
+            <Emoticon source={require('../assets/emoticon2.png')} />
+          </EmoticonWrapper>
+
+          {/* 버튼 영역 */}
+          <ButtonWrapper>
+            {/* 버튼 */}
+            <RecommendMainButton text="상황별 맞춤형 추천 받기" onPress={()=>navigation.navigate('SituationRecommendMain')}/>
+          </ButtonWrapper>
+        </RecommnedFrame>
       </RecommendMainLayout>
       </ScrollView>
     </Background>

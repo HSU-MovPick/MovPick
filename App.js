@@ -13,6 +13,7 @@ import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
 import MapPage from './pages/MapPage';
 import MapTest from './pages/MapTest';
+import CameraPage from './pages/CameraPage';
 // Google Maps Wrapper는 React Native에서 사용할 수 없음
 
 const Stack = createStackNavigator();
@@ -43,13 +44,16 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MapPage"
+        initialRouteName="Login"
         screenOptions={{ headerShown: false, animationEnabled: false }}
       >
+        {/* 추천 관련 페이지 */}
         <Stack.Screen name="RecommendMain" component={RecommendMain} />
         <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
         <Stack.Screen name="SituationRecommendMain" component={SituationRecommendMain} />
         <Stack.Screen name="SituationSelectPage" component={SituationSelectPage} />
+        <Stack.Screen name="CameraPage" component={CameraPage} />
+
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="MovieList" component={MovieList} />
