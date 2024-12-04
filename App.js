@@ -60,8 +60,6 @@ function App() {
           <Stack.Screen name="MapTest" component={MapTest} />
           <Stack.Screen name="ChatbotPage" component={ChatbotPage} />
         </Stack.Navigator>
-        {/* 하단 네비게이션 바(푸터) */}
-        <FooterNavigationBar />
     </NavigationContainer>
   );
 }

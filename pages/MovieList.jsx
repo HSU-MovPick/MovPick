@@ -5,6 +5,7 @@ import SearchButtonImg from "../assets/searchButton.png";
 import SearchClearImg from "../assets/clearButton.png";
 import MovieBlock from "../entities/MovieList/ui/MovieBlock";
 import DevilImg from "../assets/devil.png";
+import FooterNavigationBar from "../shared/components/FooterNavigationBar";
 
 export default function MovieList() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -33,6 +34,7 @@ export default function MovieList() {
   };
 
   return (
+    <>
     <Background isExist={isExist}>
       <SearchWrap>
         <DropdownWrapper>
@@ -73,6 +75,9 @@ export default function MovieList() {
         {movies.map((e, i) => <MovieBlock key={i} image={e.image} title={e.title} content={e.synopsis} />)}
       </MovieBlockWrap>
     </Background>
+    {/* 하단 네비게이션 바(푸터) */}
+    <FooterNavigationBar />
+    </>
   );
 }
 

@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
-import {ListSearchImg} from '../../assets/footer/list-search.svg'; // 목록
-import {ChatbotImg} from '../../assets/footer/chatbot.svg'; // 챗봇
-import {RecommendImg} from '../../assets/footer/recommend.svg'; //감정추천
-import {LocationImg} from '../../assets/footer/location.svg'; // 위치
+import { Image } from 'react-native'; // React Native의 Image 컴포넌트 사용
 
 
 export default function FooterNavigationBar() {
@@ -12,17 +9,21 @@ export default function FooterNavigationBar() {
 
     return (
         <Footer>
-            <NavButton onPress={() => navigation.navigate('ListPage')}>
-                <ButtonText>목록</ButtonText>
+            <NavButton onPress={() => navigation.navigate('MovieList')}>
+                {/* 목록 */}
+                <Image source={require('../../assets/footer/list-search.png')} style={{ width: 24, height: 24 }} />
             </NavButton>
             <NavButton onPress={() => navigation.navigate('ChatbotPage')}>
-                <ButtonText>챗봇</ButtonText>
+                {/* 챗봇 */}
+                <Image source={require('../../assets/footer/chatbot.png')} style={{ width: 24, height: 24 }} />
             </NavButton>
-            <NavButton onPress={() => navigation.navigate('EmotionRecommendation')}>
-                <ButtonText>감정추천</ButtonText>
+            <NavButton onPress={() => navigation.navigate('RecommendMain')}>
+                {/* 감정추천 */}
+                <Image source={require('../../assets/footer/recommend.png')} style={{ width: 24, height: 24 }} />
             </NavButton>
-            <NavButton onPress={() => navigation.navigate('LocationPage')}>
-                <ButtonText>위치</ButtonText>
+            <NavButton onPress={() => navigation.navigate('MapPage')}>
+                {/* 위치 */}
+                <Image source={require('../../assets/footer/location.png')} style={{ width: 24, height: 24 }} />
             </NavButton>
         </Footer>
     );
@@ -30,7 +31,7 @@ export default function FooterNavigationBar() {
 
 const Footer = styled.View`
   width: 100%;
-  height: 60px;
+  height: 65px;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -48,10 +49,6 @@ const NavButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-`;
+  margin-bottom:10px;
 
-const ButtonText = styled.Text`
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
 `;
