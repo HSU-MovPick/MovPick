@@ -4,6 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import axios from 'axios';
 import { GOOGLE_API_KEY } from '../config/keys'; // Google Maps API 키 파일
+import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
 export default function MapPage() {
   const [location, setLocation] = useState(null); // 사용자 위치 상태
@@ -128,54 +129,58 @@ export default function MapPage() {
   }
 
   return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: 0.06,
-          longitudeDelta: 0.06,
-        }}
-        showsUserLocation={true} // 현재 위치를 기본 마커로 표시
-      >
-        {/* 현재 위치 마커 */}
-        <Marker
-          coordinate={location}
-          title={address}
-          description={"저는 여기 있어요!"}
-          anchor={{ x: 0.5, y: 0.5 }} // 마커 기준점을 조정
+    <>
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.06,
+            longitudeDelta: 0.06,
+          }}
+          showsUserLocation={true} // 현재 위치를 기본 마커로 표시
         >
-          <Image
-            source={require('../assets/mapicon.jpg')} // 로컬 이미지 경로
-            style={{
-              width: 40, // 너비 조정
-              height: 40, // 높이 조정
-              transform: [{ translateY: -25 }], // 이미지 상단으로 이동
-            }}
-            resizeMode="contain" // 이미지 비율 유지
-          />
-        </Marker>
-
-        {/* 영화관 마커 */}
-        {cinemas.map((cinema, index) => {
-          if (!cinema.geometry || !cinema.geometry.location) {
-            return null;
-          }
-          return (
-            <Marker
-              key={index}
-              coordinate={{
-                latitude: cinema.geometry.location.lat,
-                longitude: cinema.geometry.location.lng,
+          {/* 현재 위치 마커 */}
+          <Marker
+            coordinate={location}
+            title={address}
+            description={"저는 여기 있어요!"}
+            anchor={{ x: 0.5, y: 0.5 }} // 마커 기준점을 조정
+          >
+            <Image
+              source={require('../assets/mapicon.jpg')} // 로컬 이미지 경로
+              style={{
+                width: 40, // 너비 조정
+                height: 40, // 높이 조정
+                transform: [{ translateY: -25 }], // 이미지 상단으로 이동
               }}
-              title={cinema.name}
-              description={cinema.vicinity}
+              resizeMode="contain" // 이미지 비율 유지
             />
-          );
-        })}
-      </MapView>
-    </View>
+          </Marker>
+
+          {/* 영화관 마커 */}
+          {cinemas.map((cinema, index) => {
+            if (!cinema.geometry || !cinema.geometry.location) {
+              return null;
+            }
+            return (
+              <Marker
+                key={index}
+                coordinate={{
+                  latitude: cinema.geometry.location.lat,
+                  longitude: cinema.geometry.location.lng,
+                }}
+                title={cinema.name}
+                description={cinema.vicinity}
+              />
+            );
+          })}
+        </MapView>
+      </View>
+      {/* 하단 네비게이션 바 푸터 */}
+      <FooterNavigationBar />
+    </>
   );
 }
 
