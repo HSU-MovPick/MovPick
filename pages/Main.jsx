@@ -7,9 +7,11 @@ import Background from '../shared/components/StandardBackground';
 
 
 import { useNavigation } from "@react-navigation/native"
+import FooterNavigationBar from "../shared/components/FooterNavigationBar"
 export default function Main() {
     const navigation = useNavigation()
     return (
+        <>
         <Background>
             <MovPickImg2 source={MovPick2} />
             <MainLayout>
@@ -41,6 +43,9 @@ export default function Main() {
                 </MainLayout2>
             </MainLayout>
         </Background>
+        {/* 하단 네비게이션 바(푸터) */}
+        <FooterNavigationBar />
+        </>
     );
 }
 
