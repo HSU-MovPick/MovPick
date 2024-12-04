@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, StyleSheet, ActivityIndicator, Text } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Text, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import axios from 'axios';
@@ -11,6 +11,7 @@ export default function MapPage() {
   const [errorMsg, setErrorMsg] = useState(null); // 오류 메시지
   const [cinemas, setCinemas] = useState([]); // 영화관 데이터
   const [region, setRegion] = useState(null); // 현재 지도 영역
+  const [address, setAddress] = useState(''); // 현재 위치 주소
   const isFetching = useRef(false); // 데이터를 가져오는 중인지 추적
 
   const fetchCinemas = async (coords) => {
@@ -123,16 +124,31 @@ export default function MapPage() {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        initialRegion={region}
-        showsUserLocation={true}
-        onRegionChangeComplete={onRegionChangeComplete} // 지도 이동 이벤트 처리
+        initialRegion={{
+          latitude: location.latitude,
+          longitude: location.longitude,
+          latitudeDelta: 0.06,
+          longitudeDelta: 0.06,
+        }}
+        showsUserLocation={true} // 현재 위치를 기본 마커로 표시
       >
         {/* 현재 위치 마커 */}
         <Marker
           coordinate={location}
           title="현재 위치"
-          description="저는 여기 있어요!"
-        />
+          description={"저는 여기 있어요!"}
+          anchor={{ x: 0.5, y: 0.5 }} // 마커 기준점을 조정
+        >
+          <Image
+            source={require('../assets/mapicon.jpg')} // 로컬 이미지 경로
+            style={{
+              width: 40, // 너비 조정
+              height: 40, // 높이 조정
+              transform: [{ translateY: -25 }], // 이미지 상단으로 이동
+            }}
+            resizeMode="contain" // 이미지 비율 유지
+          />
+        </Marker>
 
         {/* 영화관 마커 */}
         {cinemas.map((cinema, index) => {
