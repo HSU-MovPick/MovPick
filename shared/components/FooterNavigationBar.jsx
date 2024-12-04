@@ -13,7 +13,7 @@ export default function FooterNavigationBar() {
                 {/* 목록 */}
                 <Image source={require('../../assets/footer/list-search.png')} style={{ width: 24, height: 24 }} />
             </NavButton>
-            <NavButton onPress={() => navigation.navigate('ChatbotPage')}>
+            <NavButton onPress={() => navigation.navigate('ChatbotWelcomePage')}>
                 {/* 챗봇 */}
                 <Image source={require('../../assets/footer/chatbot.png')} style={{ width: 24, height: 24 }} />
             </NavButton>
