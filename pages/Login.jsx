@@ -10,7 +10,7 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const REST_API_KEY = "40a65c421ba8c4f7e8fed8a8937e3c77";
-const REDIRECT_URI = "https://movpick.com/oauth"; // 리디렉션 URI
+const REDIRECT_URI = "http://localhost:3000/oauth"; // 리디렉션 URI
 
 export default function Login({ navigation }) {
     const [currentUrl, setCurrentUrl] = useState(null);
@@ -110,7 +110,6 @@ export default function Login({ navigation }) {
         return (
             <View style={{ flex: 1 }}>
                 <WebView
-                    key={currentUrl}
                     source={{ uri: currentUrl }}
                     javaScriptEnabled={true}  // 자바스크립트 활성화
                     domStorageEnabled={true}  // 로컬 스토리지 활성화

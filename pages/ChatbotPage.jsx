@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
 import MovieCard from '../shared/components/MovieCard';
 import moviePoster from '../assets/movie-poster.png'
+import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
 export default function ChatbotPage() {
 // 데이터 전달 필요 -> 우선은 값 직접 전달
@@ -10,6 +11,7 @@ export default function ChatbotPage() {
   const movieCategory = "범죄, 액션, 스릴러";
   const movieReleaseDate = "2024.01.15";
   return (
+    <>
     <Background>
       <Container>
         <MovieCard 
@@ -20,6 +22,9 @@ export default function ChatbotPage() {
         />
       </Container>
     </Background>
+    {/* 하단 네비게이션 바(푸터) */}
+    <FooterNavigationBar />
+    </>
   );
 }
 
