@@ -76,3 +76,6 @@ yarn-error.*
 *.tsbuildinfo
 
 # @end expo-cli
+
+# API Key Configuration
+config/
