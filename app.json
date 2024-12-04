@@ -13,10 +13,18 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "config": {
+        "googleMapsApiKey": "AIzaSyCqc6acglUTl_keZm2BqILAGQQoX22Ilx4"
+      },
       "supportsTablet": true,
       "bundleIdentifier": "com.movpick.app"
     },
     "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCqc6acglUTl_keZm2BqILAGQQoX22Ilx4"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
