@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
-import MovieCard from '../shared/components/MovieCard';
+import MovieCard from '../shared/components/StandardMovieCard';
 
 // 테스트용 페이지 
 export default function TestingPage() {
