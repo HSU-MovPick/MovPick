@@ -16,6 +16,8 @@ import ChatbotWelcomePage from './pages/ChatbotWelcomePage';
 import ChatbotResultPage from './pages/ChatbotResultPage';
 import ChatbotChattingPage from './pages/ChatbotChattingPage';
 import SituationSelectResult from './pages/SituationSelectResult';
+import EmotionRecommendPic from './pages/EmotionRecommendPic';
+import EmotionRecommendResult from './pages/EmotionRecommendResult';
 import { db } from './firebase'; // Firebase 초기화 파일 import
 
 // Google Maps Wrapper는 React Native에서 사용할 수 없음
@@ -51,13 +53,14 @@ function App() {
   return (
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Main"
-        /* <Stack.Navigator initialRouteName="MapPage" */
+        /* <Stack.Navigator initialRouteName="Loåßgin" */
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="RecommendMain" component={RecommendMain} />
           <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
           <Stack.Screen name="SituationRecommendMain" component={SituationRecommendMain}/>
           <Stack.Screen name="SituationSelectPage" component={SituationSelectPage} />
           <Stack.Screen name="SituationSelectResult" component={SituationSelectResult} />
+          <Stack.Screen name="EmotionRecommendResult" component={SituationSelectResult}/>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="MovieList" component={MovieList} />

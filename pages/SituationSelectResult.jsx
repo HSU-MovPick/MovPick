@@ -42,7 +42,7 @@ export default function SituationSelectResult() {
     const handleFetchMoviesByGenre = async () => {
       try {
         const moviesList = await getMoviesByGenre(genre); // 장르로 영화 조회
-        setMovies(moviesList.slice(0, 5)); // 최대 5개만 가져오기
+        setMovies(moviesList.slice(0, 4)); // 최대 5개만 가져오기
       } catch (error) {
         console.error('Error fetching movies by genre:', error);
       }
@@ -65,7 +65,7 @@ export default function SituationSelectResult() {
               {movies.map((movie, index) => (
                 <MovieCardWrapper key={index}>
                   <StandardMovieCard
-                    moviePoster={movie.poster || require('../assets/popcorn.png')} // 포스터가 없으면 기본 이미지
+                    moviePoster={movie.poster} // 포스터가 없으면 기본 이미지
                     movieTitle={movie.title} // 영화 제목
                     movieCategory={movie.genre.join(', ')} // 영화 장르 (배열을 문자열로 변환)
                     movieReleaseDate={movie.release_date} // 영화 개봉일
