@@ -60,7 +60,8 @@ function App() {
           <Stack.Screen name="SituationRecommendMain" component={SituationRecommendMain}/>
           <Stack.Screen name="SituationSelectPage" component={SituationSelectPage} />
           <Stack.Screen name="SituationSelectResult" component={SituationSelectResult} />
-          <Stack.Screen name="EmotionRecommendResult" component={SituationSelectResult}/>
+          <Stack.Screen name="EmotionRecommendResult" component={EmotionRecommendResult}/>
+          <Stack.Screen name="EmotionRecommendPic" component={EmotionRecommendPic} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="MovieList" component={MovieList} />

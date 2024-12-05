@@ -42,7 +42,7 @@ export default function SituationSelectResult() {
     const handleFetchMoviesByGenre = async () => {
       try {
         const moviesList = await getMoviesByGenre(genre); // 장르로 영화 조회
-        setMovies(moviesList.slice(0, 4)); // 최대 5개만 가져오기
+        setMovies(moviesList.slice(0,5)); // 최대 5개만 가져오기
       } catch (error) {
         console.error('Error fetching movies by genre:', error);
       }
