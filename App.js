@@ -12,20 +12,12 @@ import Main from './pages/Main';
 import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
 import MapPage from './pages/MapPage';
-import ChatbotWelcomePage from './pages/ChatbotWelcomePage';
-import ChatbotResultPage from './pages/ChatbotResultPage';
-import ChatbotChattingPage from './pages/ChatbotChattingPage';
-import SituationSelectResult from './pages/SituationSelectResult';
-import EmotionRecommendPic from './pages/EmotionRecommendPic';
-import EmotionRecommendResult from './pages/EmotionRecommendResult';
-import { db } from './firebase'; // Firebase 초기화 파일 import
+import ChatbotPage from './pages/ChatbotPage';
+// import FooterNavigationBar from './shared/components/FooterNavigationBar';
 
 // Google Maps Wrapper는 React Native에서 사용할 수 없음
 
 const Stack = createStackNavigator();
-
-//FireBase Firestore
-console.log("Firestore instance: ", db);
 
 // React Native에서 로딩 및 오류 메시지 처리
 const render = (status) => {
@@ -52,25 +44,19 @@ const render = (status) => {
 function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Test"
-        /* <Stack.Navigator initialRouteName="MapPage" */
+        <Stack.Navigator initialRouteName="Login"
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="RecommendMain" component={RecommendMain} />
           <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
           <Stack.Screen name="SituationRecommendMain" component={SituationRecommendMain}/>
           <Stack.Screen name="SituationSelectPage" component={SituationSelectPage} />
-          <Stack.Screen name="SituationSelectResult" component={SituationSelectResult} />
-          <Stack.Screen name="EmotionRecommendResult" component={EmotionRecommendResult}/>
-          <Stack.Screen name="EmotionRecommendPic" component={EmotionRecommendPic} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="MovieList" component={MovieList} />
           <Stack.Screen name="MovieDetail" component={MovieDetail} />
           <Stack.Screen name="Test" component={Test} />
           <Stack.Screen name="MapPage" component={MapPage} />
-          <Stack.Screen name="ChatbotWelcomePage" component={ChatbotWelcomePage} />
-          <Stack.Screen name="ChatbotChattingPage" component={ChatbotChattingPage} />
-          <Stack.Screen name="ChatbotResultPage" component={ChatbotResultPage} />
+          <Stack.Screen name="ChatbotPage" component={ChatbotPage} />
         </Stack.Navigator>
     </NavigationContainer>
   );
