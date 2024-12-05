@@ -2,28 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
 import StandardMovieCard from '../shared/components/StandardMovieCard';
-import { db } from '../firebase'; // Firestore 초기화 파일 import
-import { collection, getDocs } from 'firebase/firestore';
+import { getAllMovies } from '../api/getAllMovies'; // 분리된 함수 import
 
-// firebase 통신 예시 코드
 export default function TestingPage() {
   const [movies, setMovies] = useState([]); // 영화 데이터를 저장할 상태
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const snapshot = await getDocs(collection(db, 'movies'));
-        const moviesList = snapshot.docs.map((doc) => ({
-          id: doc.id, // 문서 ID 포함
-          ...doc.data(), // 문서 데이터 포함
-        }));
-        setMovies(moviesList); // 상태 업데이트
-        console.log('Fetched movies:', moviesList);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      }
+    const getMovies = async () => {
+      const moviesList = await getAllMovies(); // 분리된 함수 호출
+      setMovies(moviesList); // 상태 업데이트
     };
-    fetchMovies(); // Firestore 데이터 가져오기 호출
+    getMovies(); // Firestore 데이터 가져오기 호출
   }, []);
 
   return (
