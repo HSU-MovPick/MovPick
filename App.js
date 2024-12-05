@@ -15,10 +15,15 @@ import MapPage from './pages/MapPage';
 import ChatbotWelcomePage from './pages/ChatbotWelcomePage';
 import ChatbotResultPage from './pages/ChatbotResultPage';
 import ChatbotChattingPage from './pages/ChatbotChattingPage';
+import { db } from './firebase'; // Firebase 초기화 파일 import
+
 
 // Google Maps Wrapper는 React Native에서 사용할 수 없음
 
 const Stack = createStackNavigator();
+
+//FireBase Firestore
+console.log("Firestore instance: ", db);
 
 // React Native에서 로딩 및 오류 메시지 처리
 const render = (status) => {
@@ -45,7 +50,7 @@ const render = (status) => {
 function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login"
+        <Stack.Navigator initialRouteName="Test"
         /* <Stack.Navigator initialRouteName="MapPage" */
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="RecommendMain" component={RecommendMain} />
@@ -59,8 +64,8 @@ function App() {
           <Stack.Screen name="Test" component={Test} />
           <Stack.Screen name="MapPage" component={MapPage} />
           <Stack.Screen name="ChatbotWelcomePage" component={ChatbotWelcomePage} />
-          <Stack.Screen name="ChatbotResultPage" component={ChatbotResultPage} />
           <Stack.Screen name="ChatbotChattingPage" component={ChatbotChattingPage} />
+          <Stack.Screen name="ChatbotResultPage" component={ChatbotResultPage} />
         </Stack.Navigator>
     </NavigationContainer>
   );
