@@ -18,7 +18,7 @@ function debounce(func, delay) {
   };
 }
 
-export default function MovieList() {
+export default function MovieList({ navigation }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState("전체");
   const [isExist, setIsExist] = useState(false);
@@ -31,36 +31,31 @@ export default function MovieList() {
     try {
       let moviesData = [];
       if (text) {
-        // Firestore에서 모든 영화를 가져오고 제목으로 필터링
         const allMovies = await getAllMovies();
         moviesData = allMovies.filter((movie) =>
-          movie.title.toLowerCase().includes(text.toLowerCase()) // 대소문자 무시
+          movie.title.toLowerCase().includes(text.toLowerCase())
         );
       } else if (selectedGenre !== "전체") {
         moviesData = await getMoviesByGenre(selectedGenre);
       } else {
         moviesData = await getAllMovies();
       }
-  
+
       const updatedMovies = moviesData.map((movie) => ({
         ...movie,
         image: movie.poster,
-        content: movie.description
+        content: movie.description,
       }));
-  
+
       setMovies(updatedMovies);
-  
-      // 데이터 존재 여부에 따라 isExist 업데이트
       setIsExist(updatedMovies.length > 0);
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
-  };  
+  };
 
-  // 디바운스된 fetchMovies 함수 생성
   const debouncedFetchMovies = useCallback(debounce(fetchMovies, 300), [selectedGenre]);
 
-  // 검색 텍스트가 변경될 때마다 호출
   useEffect(() => {
     debouncedFetchMovies(searchText);
   }, [searchText, debouncedFetchMovies]);
@@ -76,10 +71,9 @@ export default function MovieList() {
             </Button>
             {dropdownVisible && (
               <Dropdown>
-                {["전체", "액션", "스릴러", "코미디", "로맨스", "SF", "판타지", "공포", "애니메이션"].map((genre, index) => (
+                {genres.map((genre, index) => (
                   <DropdownItem
                     key={index}
-                    style={index === genres.length - 1 ? { borderBottomWidth: 0 } : {}}
                     onPress={() => {
                       setSelectedGenre(genre);
                       setDropdownVisible(false);
@@ -106,7 +100,13 @@ export default function MovieList() {
         <ScrollView>
           <MovieBlockWrap>
             {movies.map((movie, index) => (
-              <MovieBlock key={index} image={movie.image} title={movie.title} content={movie.content} />
+              <MovieBlock
+                key={index}
+                image={movie.image}
+                title={movie.title}
+                content={movie.content}
+                onPress={() => navigation.navigate("MovieDetail", movie)}
+              />
             ))}
           </MovieBlockWrap>
         </ScrollView>
@@ -116,7 +116,6 @@ export default function MovieList() {
   );
 }
 
-// 스타일 컴포넌트
 const SearchWrap = styled.View`
   width: 100%;
   height: 41px;

@@ -1,25 +1,19 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import styled from "styled-components";
+import { Pressable } from "react-native";
+import styled from "styled-components/native";
 
 import DefaultImage from "../../../assets/movie-default.png";
 
-export default function MovieBlock({ image, title, content }) {
-
-    const navigation = useNavigation()
-
-    function onBlockClick() {
-        navigation.navigate('MovieDetail');
-    }
-    return (
-        <MainLayout onPress={onBlockClick}>
-            <Poster source={image ? { uri: image } : DefaultImage}></Poster>
-            <InfoWrap>
-                <Title>{title}</Title>
-                <Content>{content}</Content>
-            </InfoWrap>
-        </MainLayout>
-    );
+export default function MovieBlock({ image, title, content, onPress }) {
+  return (
+    <MainLayout onPress={onPress}>
+      <Poster source={image ? { uri: image } : DefaultImage} />
+      <InfoWrap>
+        <Title>{title}</Title>
+        <Content>{content}</Content>
+      </InfoWrap>
+    </MainLayout>
+  );
 }
 
 const MainLayout = styled.Pressable`
