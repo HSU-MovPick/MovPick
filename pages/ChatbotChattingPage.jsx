@@ -29,6 +29,7 @@ export default function ChatbotChattingPage() {
 
       // 특정 영화가 확인되면 페이지 이동
       if (isMovieIdentified && identifiedMovieTitle) {
+        console.log("identifiedMovieTitle 전달됨,", identifiedMovieTitle);
         navigation.navigate('ChatbotResultPage', { movieTitle: identifiedMovieTitle });
       }
     } catch (error) {

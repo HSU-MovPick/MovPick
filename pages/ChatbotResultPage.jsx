@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import FooterNavigationBar from "../shared/components/FooterNavigationBar";
 import StandardBackground from "../shared/components/StandardBackground";
 import StandardMovieCard from "../shared/components/StandardMovieCard";
 import ResultMessage from "../entities/Chatbot/ui/ResultMessage";
 import ResultButton from "../entities/Chatbot/ui/ResultButton";
+import { getMoviesByTitle } from "../api/movies"; // 제목으로 영화 검색 함수 import
 
 export default function ChatbotResultPage({ route }) {
-  const { movie } = route.params;
+  const { movieTitle } = route.params; // movieTitle 받아오기
+  const [movie, setMovie] = useState(null); // 영화 데이터를 저장할 상태
+  const [loading, setLoading] = useState(true); // 로딩 상태
+  const userName = '혜진';
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const moviesList = await getMoviesByTitle(movieTitle); // 제목으로 영화 검색
+        setMovie(moviesList[0]); // 첫 번째 결과를 선택
+      } catch (error) {
+        console.error("Error fetching movie by title:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (movieTitle) {
+      fetchMovie();
+    }
+  }, [movieTitle]);
+
+  if (loading) {
+    return (
+      <StandardBackground>
+        <Container>
+          <MessageText>로딩 중...</MessageText>
+        </Container>
+      </StandardBackground>
+    );
+  }
 
   return (
     <>
@@ -26,7 +57,7 @@ export default function ChatbotResultPage({ route }) {
             <MessageText>영화 정보를 가져올 수 없습니다.</MessageText>
           )}
           {/* 결과 메시지 */}
-          <ResultMessage UserName="해핑" MovieTitle="베테랑" />
+          <ResultMessage UserName={userName} MovieTitle={movie?.title || "알 수 없음"} />
           {/* 결과 버튼 */}
           <ResultButton />
         </Container>
