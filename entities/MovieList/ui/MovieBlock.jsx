@@ -1,23 +1,19 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import styled from "styled-components";
+import { Pressable } from "react-native";
+import styled from "styled-components/native";
 
-export default function MovieBlock({ image, title, content }) {
+import DefaultImage from "../../../assets/movie-default.png";
 
-    const navigation = useNavigation()
-
-    function onBlockClick() {
-        navigation.navigate('MovieDetail');
-    }
-    return (
-        <MainLayout onPress={onBlockClick}>
-            <Poster source={image}></Poster>
-            <InfoWrap>
-                <Title>{title}</Title>
-                <Content>{content}</Content>
-            </InfoWrap>
-        </MainLayout>
-    );
+export default function MovieBlock({ image, title, content, onPress }) {
+  return (
+    <MainLayout onPress={onPress}>
+      <Poster source={image ? { uri: image } : DefaultImage} />
+      <InfoWrap>
+        <Title>{title}</Title>
+        <Content>{content}</Content>
+      </InfoWrap>
+    </MainLayout>
+  );
 }
 
 const MainLayout = styled.Pressable`
@@ -27,16 +23,16 @@ const MainLayout = styled.Pressable`
     background-color: #C73659;
     z-index: 1;
     flex-direction: row;
-    gap: 9px;
-    padding: 19px 16px;
+    gap: 6px;
+    padding: 10px 9px;
     overflow: hidden;
     margin-bottom : 12px;
 `;
 
 const Poster = styled.Image`
     resize-mode: contain;
-    width: 70px;
-    height: 100px;
+    width: 100px;
+    height: 115px;
     border-radius: 10px;
     flex-shrink: 0;
 `;
@@ -50,6 +46,7 @@ const Title = styled.Text`
     font-size: 15px;
     font-weight: bold;
     color: white;
+    margin-top : 4px;
 `;
 
 const Content = styled.Text`
@@ -59,5 +56,5 @@ const Content = styled.Text`
     flex-shrink: 1;
     flex-wrap: wrap;
     max-width: 100%;
-    margin-top : 4px;
+    margin-top : 6px;
 `;
