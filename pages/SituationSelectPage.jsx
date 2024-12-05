@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native';
 import SelectButton from '../entities/SelectPage/ui/SelectButton';
 import SelectSubmitButton from '../entities/SelectPage/ui/SelectSubmitButton';
 import { useNavigation } from '@react-navigation/native';
+import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
 // 상황 기반 영화 추천 선택 페이지
 export default function SelectPage() {
@@ -129,6 +130,7 @@ export default function SelectPage() {
   
 
   return (
+    <>
     <Background>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* 상황 선택 레이아웃 */}
@@ -236,6 +238,8 @@ export default function SelectPage() {
         </SituationSelectLayout>
       </ScrollView>
     </Background>
+    <FooterNavigationBar/>
+    </>
   );
 }
 

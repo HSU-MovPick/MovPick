@@ -6,22 +6,22 @@ import { useNavigation } from '@react-navigation/native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
 import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
-// 상황 기반 추천 메인 페이지
-export default function SituationRecommendMain() {
-  const navigation=useNavigation();
+// 감정 기반 추천 메인 페이지
+export default function EmotionRecommendPic() {
   return (
     <>
     <Background>
 
       <RecommendMainLayout>
-      <Intro>상황별 맞춤형 {'\n'}영화 추천을 경험해보세요!</Intro>
+      <RecommnedFrame>
+        <Intro>감정 기반 영화 추천을{'\n'}받아보세요</Intro>
         <EmoticonWrapper>
-          <Emoticon source={require('../assets/emoticon2.png')} />
+          <Emoticon source={require('../assets/emoticon1.png')} />
         </EmoticonWrapper>
         <ButtonWrapper>
-          <RecommendMainButton text="상황별 맞춤형 추천 받기"
-          onPress={()=>navigation.navigate('SituationSelectPage')}/>
-          </ButtonWrapper>
+          <RecommendMainButton text="감정 분석하러 가기"/>
+        </ButtonWrapper>
+      </RecommnedFrame>
       </RecommendMainLayout>
     </Background>
     <FooterNavigationBar />
