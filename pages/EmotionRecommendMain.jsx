@@ -4,10 +4,13 @@ import Background from '../shared/components/StandardBackground';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
+import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
 // 감정 기반 추천 메인 페이지
 export default function EmotionRecommendMain() {
+  const navigation=useNavigation();
   return (
+    <>
     <Background>
 
       <RecommendMainLayout>
@@ -17,11 +20,14 @@ export default function EmotionRecommendMain() {
           <Emoticon source={require('../assets/emoticon1.png')} />
         </EmoticonWrapper>
         <ButtonWrapper>
-          <RecommendMainButton text="감정 분석하러 가기"/>
+          <RecommendMainButton text="감정 분석하러 가기"
+          onPress={()=>navigation.navigate('EmotionRecommendPic')}/>
         </ButtonWrapper>
       </RecommnedFrame>
       </RecommendMainLayout>
     </Background>
+    <FooterNavigationBar />
+    </>
   );
 }
 
