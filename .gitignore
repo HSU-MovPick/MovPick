@@ -1,5 +1,8 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+# firebase
+firebase.js
+
 # env
 .env
 
@@ -82,5 +85,3 @@ yarn-error.*
 
 # API Key Configuration
 config/
-
-config/openai-api-keys.js
