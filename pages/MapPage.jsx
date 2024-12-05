@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import axios from 'axios';
 import { GOOGLE_API_KEY } from '../config/keys'; // Google Maps API 키 파일
 import FooterNavigationBar from '../shared/components/FooterNavigationBar';
+import cinemaData from '../data/cinemaData';
 
 export default function MapPage() {
   const [location, setLocation] = useState(null); // 사용자 위치 상태
@@ -17,24 +18,6 @@ export default function MapPage() {
   const [selectedCinema, setSelectedCinema] = useState(null); // 선택된 영화관 영화 데이터
   const [modalVisible, setModalVisible] = useState(false); // 모달 상태
 
-
-  // 가데이터: 영화관별 영화 목록
-  const cinemaData = {
-    cinema11: [
-      { id: "movie1", title: "Example Movie 1", showtimes: ["12:00 PM", "3:00 PM", "6:00 PM"] },
-      { id: "movie2", title: "Example Movie 2", showtimes: ["1:00 PM", "4:00 PM", "7:00 PM"] }
-    ],
-    cinema4: [
-      { id: "movie3", title: "Another Movie", showtimes: ["10:00 AM", "1:30 PM", "5:00 PM"] }
-    ],
-    cinema13: [
-      { id: "movie1", title: "Example Movie 1", showtimes: ["12:00 PM", "3:00 PM", "6:00 PM"] },
-      { id: "movie2", title: "Example Movie 2", showtimes: ["1:00 PM", "4:00 PM", "7:00 PM"] },
-      { id: "movie3", title: "Another Movie", showtimes: ["10:00 AM", "1:30 PM", "5:00 PM"] }
-    ]
-  };
-  
-
   const fetchCinemas = async (coords) => {
     try {
       if (isFetching.current) return; // 이미 데이터를 가져오는 중이라면 중복 호출 방지
@@ -46,7 +29,7 @@ export default function MapPage() {
           {
             params: {
               location: `${coords.latitude},${coords.longitude}`, // 기준 위치
-              radius: 5000, // 반경 5km
+              radius: 20000, // 반경 20km
               keyword: brand,
               type: 'movie_theater', // 영화관 타입
               key: GOOGLE_API_KEY, // API 키
