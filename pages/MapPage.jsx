@@ -18,6 +18,7 @@ export default function MapPage() {
   const isFetching = useRef(false); // 데이터를 가져오는 중인지 추적
   const [selectedCinema, setSelectedCinema] = useState(null); // 선택된 영화관 영화 데이터
   const [modalVisible, setModalVisible] = useState(false); // 모달 상태
+  const [sortedCinemas, setSortedCinemas] = useState([]); // 정렬된 영화관
 
   const fetchCinemas = async (coords) => {
     try {
@@ -58,6 +59,13 @@ export default function MapPage() {
       isFetching.current = false;
     }
   };
+
+  // 가까운 영화관 3곳 추출
+  useEffect(() => {
+    if (!location || cinemas.length === 0) return;
+    const sorted = sortCinemasByDistance(location, cinemas);
+    setSortedCinemas(sorted.slice(0, 3));
+  }, [location, cinemas]);  
 
   // 초기 사용자 위치 가져오기
   useEffect(() => {
@@ -143,10 +151,47 @@ export default function MapPage() {
     setModalVisible(true); // 모달 열기
   };  
 
+  // 두 마커 간의 거리 
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const toRad = (value) => (value * Math.PI) / 180;
+    const R = 6371; // 지구 반경 (단위: km)
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // 거리 (km)
+  };  
+
+  //영화관 정렬 함수
+  const sortCinemasByDistance = (currentLocation, cinemas) => {
+    if (!currentLocation) return [];
+    return cinemas
+      .map((cinema) => {
+        if (cinema.geometry && cinema.geometry.location) {
+          const distance = calculateDistance(
+            currentLocation.latitude,
+            currentLocation.longitude,
+            cinema.geometry.location.lat,
+            cinema.geometry.location.lng
+          );
+          return { ...cinema, distance };
+        }
+        return null;
+      })
+      .filter(Boolean)
+      .sort((a, b) => a.distance - b.distance);
+  };  
+
   return (
     <>
       <Background>
         <View style={styles.container}>
+          {/* 현재 위치 주소 표시 */}
+          <View style={styles.locationTextContainer}>
+            <Text style={styles.locationText}>{address || "Loading address..."}</Text>
+          </View>
           {/* 지도 위에 배경 이미지 */}
           <Image
             source={require('../assets/map-bg.png')} // 로컬 PNG 이미지 경로
@@ -236,6 +281,23 @@ export default function MapPage() {
         </Modal>
       </Background>
 
+      {/* 가까운 영화관 3곳 표시 */}
+      <View style={styles.nearbyContainer}>
+        <Text style={styles.nearbyText}>내 근처 영화관</Text>
+        <FlatList
+          data={sortedCinemas}
+          keyExtractor={(item) => item.place_id}
+          renderItem={({ item }) => (
+            <View style={styles.cinemaItem}>
+              <Text style={styles.cinemaName}> - {item.name}</Text>
+              <Text style={styles.cinemaDistance}>
+                {item.distance.toFixed(2)} km
+              </Text>
+            </View>
+          )}
+        />
+      </View>
+
       {/* 하단 네비게이션 바 푸터 */}
       <FooterNavigationBar />
     </>
@@ -253,14 +315,14 @@ const styles = StyleSheet.create({
     position: 'absolute', // 지도 위치를 고정
     ...StyleSheet.absoluteFillObject, // 지도는 화면 전체를 채움
     zIndex: 3, // 이미지 위에 지도 표시
-    top: 100, // 상단에서 100px 떨어짐
-    left: -135, // 왼쪽에서 45px 띄움
+    top: 80, // 상단에서 100px 떨어짐
+    left: -145, // 왼쪽에서 45px 띄움
     right: 20, // 오른쪽에서 20px 띄움
     height: 520, // 지도 높이
-    width: 270, // 지도 너비
+    width: 290, // 지도 너비
     borderWidth: 0, // 테두리 추가
     borderColor: '#000', // 테두리 색상
-    borderRadius: 25, // 테두리에 둥근 모서리 효과 추가
+    borderRadius: 20, // 테두리에 둥근 모서리 효과 추가
   },
   loadingContainer: {
     flex: 1,
@@ -317,10 +379,66 @@ const styles = StyleSheet.create({
   },
   mapCard: {
     position: 'absolute', // 배경 이미지를 절대 위치로 설정
-    top: 50, // 지도 위 50px 위치
+    top: 28, // 지도 위 50px 위치
     alignSelf: 'center', // 화면 가로 중심 정렬
-    width: 1500, // 원하는 너비 설정
-    height: 680, // 원하는 높이 설정
+    width: 2000, // 원하는 너비 설정
+    height: 700, // 원하는 높이 설정
     zIndex: 2 // 배경 이미지는 기본 계층
+  },
+  locationTextContainer: {
+    position: 'absolute',
+    top: 35, // 화면 상단에서 
+    left: 0,
+    right: 0,
+    alignItems: 'center', // 텍스트 중앙 정렬
+    zIndex: 4, // 지도 위에 표시되도록 설정
+  },
+  locationText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333', // 텍스트 색상
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // 반투명 배경
+    padding: 10,
+    borderRadius: 20,
+    textAlign: 'center',
+    width: 280, // 고정된 가로 길이 (300px)
+    alignSelf: 'center', // 화면 중앙 정렬
+  },
+  nearbyContainer: {
+    width: 318, // 가로 크기 350px
+    height: 88, // 세로 크기 200px
+    padding: 15,
+    backgroundColor: '#8B1C33',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+    position: 'absolute', // 하단에 고정
+    bottom: 60, // 화면 하단에서 0px
+    left: 36,
+    right: 36,
+  },
+  cinemaItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  cinemaName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  cinemaDistance: {
+    fontSize: 14,
+    color: '#fff',
+  },
+  nearbyText: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#fff'
   }
 });
