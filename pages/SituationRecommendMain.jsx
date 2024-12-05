@@ -4,11 +4,13 @@ import Background from '../shared/components/StandardBackground';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
+import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
 // 상황 기반 추천 메인 페이지
 export default function SituationRecommendMain() {
   const navigation=useNavigation();
   return (
+    <>
     <Background>
 
       <RecommendMainLayout>
@@ -22,6 +24,8 @@ export default function SituationRecommendMain() {
           </ButtonWrapper>
       </RecommendMainLayout>
     </Background>
+    <FooterNavigationBar />
+    </>
   );
 }
 
