@@ -1,17 +1,19 @@
 import { Image, ImageBackground, StyleSheet, Text } from 'react-native';
 import MovieCardPNG from '../../assets/movie-card.png';
-// 포스터 안쪽 그림자, 포스터 비율 추후 구현 예정
+import MovieDefaultImg from '../../assets/movie-default.png';
 
 export default function StandardMovieCard({ moviePoster, movieTitle, movieCategory, movieReleaseDate }) {
-  // console.log("moviePoster",moviePoster);
+  // moviePoster가 null인지 확인하여 이미지 소스를 결정합니다.
+  const imageSource = moviePoster ? { uri: moviePoster } : MovieDefaultImg;
+
   return (
     <ImageBackground 
       source={MovieCardPNG} 
-      style={styles.card} // 이미지 크기와 텍스트 배치
-      imageStyle={styles.imageStyle} // 이미지 자체 스타일
+      style={styles.card}
+      imageStyle={styles.imageStyle}
     >
-      {/* moviePoster : 이미지 URL */}
-      <Image source={{ uri: moviePoster }} style={styles.moviePoster} /> 
+      {/* 결정된 이미지 소스를 사용합니다 */}
+      <Image source={imageSource} style={styles.moviePoster} /> 
       <Text style={styles.title}>{movieTitle}</Text>
       <Text style={styles.category}># {movieCategory}</Text>
       <Text style={styles.releaseDate}># {movieReleaseDate}</Text>
@@ -21,31 +23,30 @@ export default function StandardMovieCard({ moviePoster, movieTitle, movieCatego
 
 const styles = StyleSheet.create({
   card: {
-    width: 270, // 이미지 너비
-    aspectRatio: 0.603, // 피그마 기반 비율
+    width: 270,
+    aspectRatio: 0.603,
     borderRadius: 15, 
-    overflow: 'hidden', // 테두리 밖 내용 숨김
-    justifyContent: 'flex-end', // 텍스트를 하단에 배치
-    padding: 40, // 텍스트에 줄 여백
-    transform: [{ rotate: '5deg' }], // 5도 회전
+    overflow: 'hidden',
+    justifyContent: 'flex-end',
+    padding: 40,
+    transform: [{ rotate: '5deg' }],
   },
   imageStyle: {
-    resizeMode: 'cover', // 이미지 비율 유지하며 채우기
+    resizeMode: 'cover',
   },
   moviePoster: { 
     width: 184,
     height: 230,
-    borderRadius: 20, // 테두리 굴곡
+    borderRadius: 20,
     marginLeft: 5,
-    marginBottom: 62, // 텍스트와의 간격
-    resizeMode: 'cover', // 포스터 이미지 비율 유지
+    marginBottom: 62,
+    resizeMode: 'cover',
   },
   title: {
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
-    // 그림자
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'white',
     marginTop: 5,
-    // 그림자
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'white',
     marginTop: 5,
-    // 그림자
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,

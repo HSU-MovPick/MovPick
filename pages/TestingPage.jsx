@@ -3,29 +3,8 @@ import styled from 'styled-components/native';
 import Background from '../shared/components/StandardBackground';
 import StandardMovieCard from '../shared/components/StandardMovieCard';
 import { getAllMovies, getMoviesByTitle, addMoviesToDB } from '../api/movies'; // 분리된 함수 import
+import moviesData from '../data/moviesData'; // firebase에 넣을 Data 가져오기
 
-const moviesData = [
-  {
-    title: '매드 맥스',
-    actors: ['톰 하디', '샤를리즈 테론', '니콜라스 홀트'],
-    description: '포스트 아포칼립스 세상에서 유랑자와 반역자가 물 공급을 장악한 폭군을 무너뜨리기 위해 협력한다.',
-    duration: 120,
-    genre: ['액션', '아아'],
-    poster: 'https://ifh.cc/g/t6ZlGh.jpg',
-    rating: '15세 이상 관람가',
-    release_date: '2025.05.14',
-  },
-  {
-    title: '인터스텔라',
-    actors: ['매튜 맥커너히', '앤 해서웨이', '제시카 차스테인'],
-    description: '웜홀을 통해 새로운 거주지를 찾는 탐험대의 이야기.',
-    duration: 169,
-    genre: ['SF', '드라마'],
-    poster: 'https://ifh.cc/g/example.jpg',
-    rating: '12세 이상 관람가',
-    release_date: '2014.11.07',
-  },
-];
 
 export default function TestingPage() {
   const [movies, setMovies] = useState([]); // 영화 데이터를 저장할 상태
