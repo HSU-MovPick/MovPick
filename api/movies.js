@@ -35,6 +35,35 @@ export const getMoviesByTitle = async (title) => {
   }
 };
 
+
+// 장르로 영화 검색 
+export const getMoviesByGenre = async (genre) => {
+  try {
+    // genre가 비어있거나 유효하지 않으면 빈 배열 반환
+    if (!genre || typeof genre !== 'string') {
+      return []; // 빈 배열 반환
+    }
+
+    // Firestore 쿼리: 배열 내 문자열 포함 여부 확인
+    const q = query(
+      collection(db, 'movies'),
+      where('genre', 'array-contains', genre) // 배열에 해당 문자열 포함 여부
+    );
+    const snapshot = await getDocs(q);
+
+    const moviesList = snapshot.docs.map((doc) => ({
+      id: doc.id, // 문서 ID 포함
+      ...doc.data(), // 문서 데이터 포함
+    }));
+
+    return moviesList; // 결과 반환
+  } catch (error) {
+    console.error('Error fetching movies by genre:', error);
+    throw error; // 에러를 호출한 곳으로 전달
+  }
+};
+
+
 // DB에 데이터 추가 (json으로 받아서)
 export const addMoviesToDB = async (moviesData) => {
   if (!Array.isArray(moviesData)) {
