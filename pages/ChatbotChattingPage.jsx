@@ -13,7 +13,7 @@ export default function ChatbotChattingPage() {
   const scrollViewRef = useRef(null);
   const navigation = useNavigation();
 
-  // GPT API 호출
+  //gpt api 호출
   const sendMessageToAI = async () => {
     if (!userInput.trim()) return;
 
@@ -23,9 +23,14 @@ export default function ChatbotChattingPage() {
     setIsLoading(true);
 
     try {
-      // callOpenAI 유틸리티 사용
-      const aiResponse = await callOpenAI(newMessages, "You are a helpful assistant for movie recommendations.");
+      const { text: aiResponse, isMovieIdentified, identifiedMovieTitle } = await callOpenAI(newMessages);
+
       setMessages((prev) => [...prev, { sender: 'ai', text: aiResponse }]);
+
+      // 특정 영화가 확인되면 페이지 이동
+      if (isMovieIdentified && identifiedMovieTitle) {
+        navigation.navigate('ChatbotResultPage', { movieTitle: identifiedMovieTitle });
+      }
     } catch (error) {
       console.error('Error calling OpenAI API:', error);
       setMessages((prev) => [...prev, { sender: 'ai', text: '오류 발생. 다시 시도해주세요.' }]);
