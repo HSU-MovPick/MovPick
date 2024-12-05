@@ -85,3 +85,32 @@ export const addMoviesToDB = async (moviesData) => {
     console.error('Error adding movies to Firestore:', error);
   }
 };
+
+// 제목과 장르로 영화 검색
+export const getMoviesByTitleAndGenre = async (title, genre) => {
+  try {
+    let q;
+    if (genre === "전체") {
+      // 제목만 필터링
+      q = query(collection(db, "movies"), where("title", "==", title));
+    } else {
+      // 제목과 장르 필터링
+      q = query(
+        collection(db, "movies"),
+        where("title", "==", title),
+        where("genre", "array-contains", genre)
+      );
+    }
+
+    const snapshot = await getDocs(q);
+    const moviesList = snapshot.docs.map((doc) => ({
+      id: doc.id, // 문서 ID 포함
+      ...doc.data(), // 문서 데이터 포함
+    }));
+
+    return moviesList; // 결과 반환
+  } catch (error) {
+    console.error("Error fetching movies by title and genre:", error);
+    throw error; // 에러를 호출한 곳으로 전달
+  }
+};
