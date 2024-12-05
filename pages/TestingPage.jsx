@@ -47,15 +47,15 @@ export default function TestingPage() {
     }
   };
   
-  // // data 업로드
-  // const handleUploadMovies = async () => {
-  //   try {
-  //     await addMoviesToDB(moviesData); // Firestore에 데이터 추가
-  //     console.log('Movies uploaded successfully!');
-  //   } catch (error) {
-  //     console.error('Error uploading movies:', error);
-  //   }
-  // };
+  // data 업로드
+  const handleUploadMovies = async () => {
+    try {
+      await addMoviesToDB(moviesData); // Firestore에 데이터 추가
+      console.log('Movies uploaded successfully!');
+    } catch (error) {
+      console.error('Error uploading movies:', error);
+    }
+  };
 
   return (
     <Background>
@@ -70,6 +70,9 @@ export default function TestingPage() {
           </TestButton>
           <TestButton onPress={handleFetchMoviesByGenre}>
             <ButtonText>장르로 조회 </ButtonText>
+            </TestButton>
+            <TestButton onPress={handleUploadMovies}>
+            <ButtonText>데이터 넣기</ButtonText>
           </TestButton>
         </ButtonContainer>
         {movies.map((movie) => (
@@ -119,6 +122,6 @@ const TestButton = styled.TouchableOpacity`
 
 const ButtonText = styled.Text`
   color: white;
-  font-size: 16px;
+  font-size: 7px;
   font-weight: bold;
 `;
