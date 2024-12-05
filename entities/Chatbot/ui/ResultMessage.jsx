@@ -29,8 +29,9 @@ export default function ResultMessage({ UserName, MovieTitle }) {
 
 const styles = StyleSheet.create({
   container: {
-    height:190,
+    height:230,
     marginBlockStart:-50,
+    marginBlockEnd:-30,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
     marginRight: -20, // 이미지와 텍스트 간의 간격
   },
   userName: {
+    marginBlockStart:10,
     fontSize: 15,
     color: '#FFF',
     fontFamily: 'Pretendard',

@@ -56,12 +56,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    padding: -20,
   },
   button: {
     width:150,
     backgroundColor: "#A91D3A",
-    marginHorizontal: 5,
+    marginHorizontal: 7,
     paddingVertical: 15,
     borderRadius: 20,
     alignItems: "center",
