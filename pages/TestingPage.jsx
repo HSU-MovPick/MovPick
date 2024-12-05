@@ -35,7 +35,7 @@ export default function TestingPage() {
             key={movie.id} // 고유 key 추가
             moviePoster={movie.poster} // Firestore에서 가져온 URL
             movieTitle={movie.title}
-            movieCategory={movie.genre}
+            movieCategory={movie.genre.join(' #')} // 배열을 문자열로 변환
             movieReleaseDate={movie.release_date}
           />
         ))}
