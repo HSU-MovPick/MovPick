@@ -4,6 +4,9 @@ import StandardBackground from '../shared/components/StandardBackground';
 import axios from 'axios';
 import { OPENAI_API_KEY } from '../config/openai-api-keys';
 import { TouchableOpacity } from 'react-native';
+import { useNavigation } from "@react-navigation/native"; // Navigation hook
+import {getMoviesByTitle} from '../api/movies';
+
 import {
   View,
   TextInput,
@@ -17,12 +20,34 @@ import {
   Platform
 } from 'react-native';
 
+import QuestionButton from "../entities/Chatbot/ui/QuestionButton"
+
+
 // 나중에.... 컴포넌트로 분리할거임,,,, 일단 구현 몬저 하구,,,,
 export default function ChatbotChattingPage() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollViewRef = useRef(null);
+  const navigation = useNavigation(); // Navigation hook 사용
+  const [movies, setMovies] = useState([]); // 영화 목록 상태
+
+  // 제목으로 영화 검색
+  const handleFetchMoviesByTitle = async () => {
+    try {
+      const title = "타이타닉"; // 테스트용 제목
+      const moviesList = await getMoviesByTitle(title); // 특정 제목으로 영화 검색
+  
+      if (moviesList.length > 0) {
+        navigation.navigate("ChatbotResultPage", { movie: moviesList[0] }); // 첫 번째 영화 전달
+      } else {
+        console.log("No movies found for the given title.");
+      }
+    } catch (error) {
+      console.error("Error fetching movies by title:", error);
+    }
+  };
+  
 
   const sendMessageToAI = async () => {
     if (!userInput.trim()) return;
@@ -62,6 +87,13 @@ export default function ChatbotChattingPage() {
 
   return (
     <StandardBackground>
+
+      {/* 임시 연결 도구 -> 후에 gpt응답 반환값으로 넘어가게 해야 함 */}
+      <QuestionButton 
+        text="임시버튼, 결과 화면 가기" 
+        onPress={handleFetchMoviesByTitle} // 함수 호출
+      />
+
     <TouchableWithoutFeedback
       onPress={() => {
         Keyboard.dismiss(); // 키보드 내려가기

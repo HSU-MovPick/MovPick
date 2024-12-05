@@ -49,7 +49,7 @@ const render = (status) => {
 function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Test"
+        <Stack.Navigator initialRouteName="Main"
         /* <Stack.Navigator initialRouteName="MapPage" */
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="RecommendMain" component={RecommendMain} />
