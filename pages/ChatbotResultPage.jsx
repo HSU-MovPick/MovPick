@@ -12,6 +12,7 @@ export default function ChatbotResultPage({ route }) {
   const [movie, setMovie] = useState(null); // 영화 데이터를 저장할 상태
   const [loading, setLoading] = useState(true); // 로딩 상태
   const userName = '혜진';
+  const defaultMoviePoster = 'https://ifh.cc/g/P0CMjF.png'; //default 포스터 이미지 주소
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -54,10 +55,17 @@ export default function ChatbotResultPage({ route }) {
               movieReleaseDate={movie.release_date}
             />
           ) : (
-            <MessageText>영화 정보를 가져올 수 없습니다.</MessageText>
+            // DB에 없는 경우
+            <StandardMovieCard
+            key={"placeholder"} // movie가 없을 때 고유한 키 값
+            moviePoster={defaultMoviePoster}
+            movieTitle={movieTitle}
+            movieCategory="세부정보 확인 불가"
+            movieReleaseDate="세부정보 확인 불가"
+            />          
           )}
           {/* 결과 메시지 */}
-          <ResultMessage UserName={userName} MovieTitle={movie?.title || "알 수 없음"} />
+          <ResultMessage UserName={userName} MovieTitle={movie?.title || movieTitle} />
           {/* 결과 버튼 */}
           <ResultButton />
         </Container>
