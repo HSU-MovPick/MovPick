@@ -32,7 +32,8 @@ export default function TestingPage() {
         <Text>테스트용 페이지</Text>
         {movies.map((movie) => (
           <StandardMovieCard
-            moviePoster={{ uri: movie.poster }} // Firestore에서 가져온 URL
+            key={movie.id} // 고유 key 추가
+            moviePoster={movie.poster} // Firestore에서 가져온 URL
             movieTitle={movie.title}
             movieCategory={movie.genre}
             movieReleaseDate={movie.release_date}
