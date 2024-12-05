@@ -13,7 +13,7 @@ const movieTitle = "The Great Adventure";
 const movieCategory = "Adventure";
 const movieReleaseDate = "2024-12-10";
 
-// 질문화면 - 초기화면r
+// 질문화면 - 초기화면
 export default function ChatbotWelcomePage() {
   const navigation = useNavigation(); // Navigation hook 사용
 
