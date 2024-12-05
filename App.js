@@ -17,7 +17,6 @@ import ChatbotResultPage from './pages/ChatbotResultPage';
 import ChatbotChattingPage from './pages/ChatbotChattingPage';
 import { db } from './firebase'; // Firebase 초기화 파일 import
 
-
 // Google Maps Wrapper는 React Native에서 사용할 수 없음
 
 const Stack = createStackNavigator();
@@ -50,7 +49,7 @@ const render = (status) => {
 function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Test"
+        <Stack.Navigator initialRouteName="Login"
         /* <Stack.Navigator initialRouteName="MapPage" */
         screenOptions={{ headerShown: false, animationEnabled: false }}>
           <Stack.Screen name="RecommendMain" component={RecommendMain} />
