@@ -1,38 +1,36 @@
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import BackbuttonImg from "../assets/BackButton.png";
 
-export default function MovieDetail({ title, poster, detail, content }) {
-
+export default function MovieDetail({ route }) {
     const navigation = useNavigation();
-
-    function onBackPress() {
-        navigation.goBack();
-    }
+    const { title, poster, description, actors, duration, genre, rating, release_date } = route.params;
 
     return (
-
         <MainLayout>
             <Wrap>
                 <TitleSection>
-                    <BackButton onPress={()=>onBackPress()}>
+                    <BackButton onPress={() => navigation.goBack()}>
                         <BackButtonImg source={BackbuttonImg} />
                     </BackButton>
                     <TitleWrap>
                         <Title>{title}</Title>
                     </TitleWrap>
-
                 </TitleSection>
                 <DetailSection>
-                    <MovieTitle>
-                        영화정보
-                    </MovieTitle>
+                    <MovieTitle>영화정보</MovieTitle>
                     <InfoWrap>
-                        <Poster source={poster} />
-                        <InfoDetail>{detail}</InfoDetail>
+                        <Poster source={poster ? { uri: poster } : require("../assets/movie-default.png")} />
+                        <InfoDetail1>
+                            <BoldText>출연진:</BoldText> {actors.join(", ")}{"\n"}{"\n"}
+                            <BoldText>상영 시간:</BoldText> {duration}분{"\n"}{"\n"}
+                            <BoldText>장르:</BoldText> {genre.join(", ")}{"\n"}{"\n"}
+                            <BoldText>관람 등급:</BoldText> {rating}{"\n"}{"\n"}
+                            <BoldText>개봉일:</BoldText> {release_date}
+                        </InfoDetail1>
                     </InfoWrap>
-
-                    <InfoDetail>{content}</InfoDetail>
+                    <InfoDetail2>{description}</InfoDetail2>
                 </DetailSection>
             </Wrap>
         </MainLayout>
@@ -40,24 +38,23 @@ export default function MovieDetail({ title, poster, detail, content }) {
 }
 
 const MainLayout = styled.View`
-justify-content: center;
-width: 100%;
-padding: 48px 12px;
-`
+  justify-content: center;
+  width: 100%;
+  padding: 48px 12px;
+`;
 
 const Wrap = styled.View`
-height: 100%;
-background-color: black;
-border-radius: 24px;
-
-`
+  height: 100%;
+  background-color: black;
+  border-radius: 24px;
+`;
 
 const TitleSection = styled.View`
-padding: 12px;
-height: 160px;
-background-color: #C73659;
-border-radius: 24px 24px 0 0;
-`
+  padding: 12px;
+  height: 160px;
+  background-color: #c73659;
+  border-radius: 24px 24px 0 0;
+`;
 
 const BackButton = styled.TouchableOpacity`
   width: 28px;
@@ -71,43 +68,60 @@ const BackButtonImg = styled.Image`
 `;
 
 const TitleWrap = styled.View`
-flex-direction: row;
-justify-content: center;
-`
+  flex-direction: row;
+  justify-content: center;
+`;
+
 const Title = styled.Text`
-color: white;
-font-weight: 600;
-font-size: 28px;
-`
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 35px;
+`;
 
 const DetailSection = styled.View`
-padding: 24px 16px;
-`
+  padding: 24px 16px;
+`;
 
 const Poster = styled.Image`
-    resize-mode: contain;
-    width: 130px;
-    height: 200px;
-    border-radius: 10px;
-    flex-shrink: 0;
-    margin-right: 20px;
+  resize-mode: contain;
+  width: 130px;
+  height: 200px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  margin-right: 13px;
 `;
 
 const MovieTitle = styled.Text`
-color: white;
-font-size: 20px;
-font-weight: 500;
-margin-bottom: 24px;
-font-weight: bold;
-`
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 11px;
+  margin-left: 7px;
+`;
 
 const InfoWrap = styled.View`
-flex-direction: row;
-margin-bottom: 48px;
-`
+  width: 199px;
+  flex-direction: row;
+  margin-bottom: 18px;
+`;
 
-const InfoDetail = styled.Text`
-color: white;
-font-size: 12px;
-font-weight: 500;
-`
+const InfoDetail1 = styled.Text`
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 27px;
+`;
+
+const InfoDetail2 = styled.Text`
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 10px;
+`;
+
+const BoldText = styled.Text`
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+`;
