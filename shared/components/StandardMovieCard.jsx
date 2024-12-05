@@ -23,7 +23,7 @@ export default function StandardMovieCard({ moviePoster, movieTitle, movieCatego
 
 const styles = StyleSheet.create({
   card: {
-    width: 270,
+    width: 265,
     aspectRatio: 0.603,
     borderRadius: 15, 
     overflow: 'hidden',
