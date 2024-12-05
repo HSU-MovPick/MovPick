@@ -4,11 +4,13 @@ import Background from '../shared/components/StandardBackground';
 import { Image, ScrollView } from 'react-native';
 import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
 import { useNavigation } from '@react-navigation/native';
+import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 
 // 영화 추천 메인 페이지
 export default function RecommendMain() {
   const navigation = useNavigation();
   return (
+    <>
     <Background>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
@@ -41,6 +43,8 @@ export default function RecommendMain() {
       </RecommendMainLayout>
       </ScrollView>
     </Background>
+    <FooterNavigationBar />
+    </>
   );
 }
 
