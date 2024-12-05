@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where, writeBatch, doc} from 'firebase/firestore';
 import { db } from '../firebase'; // Firestore 초기화 파일 import
 
 // 모든 영화 검색
@@ -32,5 +32,27 @@ export const getMoviesByTitle = async (title) => {
   } catch (error) {
     console.error('Error fetching movies by title:', error);
     throw error; // 에러를 호출한 곳으로 전달
+  }
+};
+
+// DB에 데이터 추가 (json으로 받아서)
+export const addMoviesToDB = async (moviesData) => {
+  if (!Array.isArray(moviesData)) {
+    console.error('Invalid data format: Expected an array of movies.');
+    return;
+  }
+
+  const batch = writeBatch(db); // Firestore 배치 초기화
+
+  try {
+    moviesData.forEach((movie) => {
+      const movieRef = doc(collection(db, 'movies')); // movies 컬렉션의 새 문서 참조
+      batch.set(movieRef, movie); // 영화 데이터를 문서로 추가
+    });
+
+    await batch.commit(); // 모든 작업 커밋
+    console.log('Movies added successfully!');
+  } catch (error) {
+    console.error('Error adding movies to Firestore:', error);
   }
 };
