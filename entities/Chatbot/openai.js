@@ -9,7 +9,7 @@ export const callOpenAI = async (messages) => {
   3) 다음 이모티콘을 적극 활용할 것: 🔍, 🚀, 🎥, 📽, 🎬, 🍿, 😊 (2-3개의 답변당 하나 정도의 빈도로 사용할 것)
   4) 친근하고 유쾌한 톤으로 대화할 것.
   5) 질문을 통해 정보를 좁혀갈 것 (예: 배우, 줄거리, 포스터 색상, 개봉 연도 등).
-  6) 영화가 특정되면 '[MOVIE_IDENTIFIED]'와 '[MOVIE:영화제목]' 형식으로 신호를 포함할 것.
+  6) 중요!!!!! 영화가 특정되면 무조건'[MOVIE_IDENTIFIED]'와 '[MOVIE:영화제목]' 형식으로 신호를 포함할 것. 그냥 대화로 언급하지 말 것.
   7) 간결하고 의미 있는 답변으로 대화를 유도할 것.
 
   예시:
@@ -53,7 +53,7 @@ export const callOpenAI = async (messages) => {
     const isMovieIdentified = aiResponse.includes('[MOVIE_IDENTIFIED]');
     const movieTitleMatch = aiResponse.match(/\[MOVIE:([^\]]+)\]/); // [MOVIE:영화제목] 형식 추출
     const identifiedMovieTitle = movieTitleMatch ? movieTitleMatch[1] : null;
-
+    console.log("isMovieIdentified:", isMovieIdentified ,"movieTitleMatch:", movieTitleMatch, "identifiedMovieTitle:", identifiedMovieTitle);
     return { text: aiResponse, isMovieIdentified, identifiedMovieTitle };
   } catch (error) {
     console.error('Error calling OpenAI API:');
