@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
+import { Dimensions, Image, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Background from '../shared/components/StandardBackground';
-import { Image, FlatList, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
-import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButton';
-import { useNavigation, Linking } from '@react-navigation/native';
 import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 import axios from 'axios';
 import { GOOGLE_CLOUD_API_KEY } from '../config/google-cloud-api-key';
+
 const YOUTUBE_API_KEY = GOOGLE_CLOUD_API_KEY;
 const MOVIE_TITLE = "영화 예고편"; // 검색할 영화 제목
+const screenWidth = Dimensions.get('window').width; // 화면 너비 가져오기
 
 export default function VideoPage() {
-  const navigation = useNavigation();
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,8 +21,6 @@ export default function VideoPage() {
   const fetchYouTubeVideos = async () => {
     try {
       const query = encodeURIComponent(`${MOVIE_TITLE} trailer`);
-      console.log("API Key:", YOUTUBE_API_KEY);
-
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&type=video&key=${YOUTUBE_API_KEY}`
       );
@@ -40,9 +37,11 @@ export default function VideoPage() {
       style={{
         flexDirection: "row",
         marginBottom: 10,
-        backgroundColor: "#fff",
+        backgroundColor: "#C74659",
         padding: 10,
         borderRadius: 10,
+        width: screenWidth * 0.8, // 화면 너비의 90%로 설정
+        alignSelf: "center", // 중앙 정렬
       }}
       onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${item.id.videoId}`)}
     >
@@ -68,11 +67,7 @@ export default function VideoPage() {
             renderItem={renderVideoItem}
             keyExtractor={(item) => item.id.videoId}
             contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}
-            ListHeaderComponent={
-              <>
-                <Intro>최신 영화 예고편을 확인해보세요!</Intro>
-              </>
-            }
+            ListHeaderComponent={<Intro>최신 영화 예고편을 확인해보세요!</Intro>}
           />
         )}
       </Background>
@@ -81,16 +76,12 @@ export default function VideoPage() {
   );
 }
 
-const ButtonWrapper = styled.View`
-  align-items: center;
-  margin-top: 20px;
-`;
 const Intro = styled.Text`
   font-size: 20px;
   color: #FFFFFF;
   font-weight: 900;
   text-align: left;
-  margin-bottom: 20px;
+  margin: 40px 0px 20px 0px;
 `;
 const VideoInfo = styled.View`
   flex: 1;
@@ -99,9 +90,9 @@ const VideoInfo = styled.View`
 const VideoTitle = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: #FFFFFF;
 `;
 const VideoChannel = styled.Text`
   font-size: 14px;
-  color: gray;
+  color: #FFFFFF;
 `;
