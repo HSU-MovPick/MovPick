@@ -52,7 +52,7 @@ function App() {
   return (
     <NavigationContainer>
       
-        <Stack.Navigator initialRouteName="VideoPage"
+        <Stack.Navigator initialRouteName="Main"
         screenOptions={{ headerShown: false, animationEnabled: false }}>
             <Stack.Screen name="RecommendMain" component={RecommendMain} />
             <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
