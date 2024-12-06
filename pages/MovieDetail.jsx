@@ -3,38 +3,44 @@ import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import BackbuttonImg from "../assets/BackButton.png";
 
-export default function MovieDetail({ route }) {
-    const navigation = useNavigation();
-    const { title, poster, description, actors, duration, genre, rating, release_date } = route.params;
+import FooterNavigationBar from "../shared/components/FooterNavigationBar"
 
-    return (
-        <MainLayout>
-            <Wrap>
-                <TitleSection>
-                    <BackButton onPress={() => navigation.goBack()}>
-                        <BackButtonImg source={BackbuttonImg} />
-                    </BackButton>
-                    <TitleWrap>
-                        <Title>{title}</Title>
-                    </TitleWrap>
-                </TitleSection>
-                <DetailSection>
-                    <MovieTitle>영화정보</MovieTitle>
-                    <InfoWrap>
-                        <Poster source={poster ? { uri: poster } : require("../assets/movie-default.png")} />
-                        <InfoDetail1>
-                            <BoldText>출연진:</BoldText> {actors.join(", ")}{"\n"}{"\n"}
-                            <BoldText>상영 시간:</BoldText> {duration}분{"\n"}{"\n"}
-                            <BoldText>장르:</BoldText> {genre.join(", ")}{"\n"}{"\n"}
-                            <BoldText>관람 등급:</BoldText> {rating}{"\n"}{"\n"}
-                            <BoldText>개봉일:</BoldText> {release_date}
-                        </InfoDetail1>
-                    </InfoWrap>
-                    <InfoDetail2>{description}</InfoDetail2>
-                </DetailSection>
-            </Wrap>
-        </MainLayout>
-    );
+export default function MovieDetail({ route }) {
+  const navigation = useNavigation();
+  const { title, poster, description, actors, duration, genre, rating, release_date } = route.params;
+
+  return (
+    <>
+      <MainLayout>
+        <Wrap>
+          <TitleSection>
+            <BackButton onPress={() => navigation.goBack()}>
+              <BackButtonImg source={BackbuttonImg} />
+            </BackButton>
+            <TitleWrap>
+              <Title>{title}</Title>
+            </TitleWrap>
+          </TitleSection>
+          <DetailSection>
+            <MovieTitle>영화정보</MovieTitle>
+            <InfoWrap>
+              <Poster source={poster ? { uri: poster } : require("../assets/movie-default.png")} />
+              <InfoDetail1>
+                <BoldText>출연진:</BoldText> {actors.join(", ")}{"\n"}{"\n"}
+                <BoldText>상영 시간:</BoldText> {duration}분{"\n"}{"\n"}
+                <BoldText>장르:</BoldText> {genre.join(", ")}{"\n"}{"\n"}
+                <BoldText>관람 등급:</BoldText> {rating}{"\n"}{"\n"}
+                <BoldText>개봉일:</BoldText> {release_date}
+              </InfoDetail1>
+            </InfoWrap>
+            <InfoDetail2>{description}</InfoDetail2>
+          </DetailSection>
+        </Wrap>
+      </MainLayout>
+      {/* 하단 네비게이션 바(푸터) */}
+      <FooterNavigationBar />
+    </>
+  );
 }
 
 const MainLayout = styled.View`
