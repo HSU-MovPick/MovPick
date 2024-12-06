@@ -116,12 +116,14 @@ export default function Main() {
 }
 
 const MainWrapper=styled.View`
-padding : 0px 30px;
+padding : 0px 20px;
+margin-top:15px;
+align-items: center;
 `;
 
 const MovPickImg2 = styled.Image`
-  width: 320px;
-  height: 80px;
+  width: 100px;
+  height: 130px;
   padding-top: 35px;
   margin-bottom: 2px;
 `;
