@@ -30,7 +30,7 @@ export default function ChatInput({ userInput, setUserInput, sendMessageToAI, is
 const styles = StyleSheet.create({
   inputContainer: {
     width: 360, // 가로 길이 유지
-    marginBottom: -15,
+    marginBottom: -30,
     flexDirection: 'row',
     alignItems: 'center',
     padding: 8,
