@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import MovPick2 from '../assets/MovPick2.png'
+import MovPick3 from '../assets/MovPick3.png'
 import Emoticon4 from '../assets/emoticon4.png'
 import Emoticon5 from '../assets/emoticon5.png'
 import Emoticon3 from '../assets/emoticon3.png'
@@ -13,7 +13,7 @@ export default function Main() {
     return (
         <>
         <Background>
-            <MovPickImg2 source={MovPick2} />
+            <MovPickImg3 source={MovPick3} />
             <MainLayout>
                 <EmoticonImg1 source={Emoticon4} />
                 <MainLayout2>
@@ -50,7 +50,7 @@ export default function Main() {
     );
 }
 
-const MovPickImg2 = styled.Image`
+const MovPickImg3 = styled.Image`
 width : 320px;
 height : 80px;
 margin-bottom : 2px;

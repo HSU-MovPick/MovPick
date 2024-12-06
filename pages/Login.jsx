@@ -3,7 +3,7 @@ import { View, Alert } from "react-native";
 import { WebView } from "react-native-webview";
 import styled from "styled-components";
 import Logo from "../assets/logo.png";
-import MovPick from "../assets/MovPick.png";
+import MovPick from "../assets/MovPick2.png";
 import KakaoLogo from "../assets/kakaologo.png";
 import MainTicket from "../assets/mainticket.png";
 import axios from "axios";
@@ -149,16 +149,16 @@ const MainLayout = styled.View`
 `;
 
 const MovPickImg = styled.Image`
-  width: 300px;
-  height: 80px;
+  width: 210px;
+  height: 180px;
   margin-top: 50px;
-  margin-bottom: 40px;
 `;
 
 const LogoImg = styled.Image`
-  width: 197px;
-  height: 197px;
-  margin-bottom: 30px;
+  width: 185px;
+  height: 185px;
+  margin-bottom: 18px;
+  margin-top: 5px;
 `;
 
 const KakaoLogoImg = styled.Image`
@@ -180,7 +180,7 @@ const KakaoLoginButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 `;
 
 const MainTicketImg = styled.Image`
