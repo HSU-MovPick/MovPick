@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15, // 좌우 여백
   },
   overlay: {
+    marginLeft: 10,
+
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
