@@ -101,7 +101,7 @@ export default function SituationSelectResult() {
   `;
   
   const Intro = styled.Text`
-    font-size: 30px;
+    font-size: 28px;
     color: #FFFFFF;
     font-weight: 900;
     text-align: left;
