@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 8,
+    marginRight:10,
     backgroundColor: '#fff',
   },
   textInput: {

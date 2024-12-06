@@ -59,7 +59,7 @@ export default function EmotionRecommendResult() {
             {movies.map((movie, index) => (
               <MovieCardWrapper key={index}>
                 <StandardMovieCard
-                  moviePoster={movie.poster || '기본 이미지 경로'}
+                  moviePoster={movie.poster ||null}
                   movieTitle={movie.title}
                   movieCategory={movie.genre?.join(', ') || '장르 정보 없음'}
                   movieReleaseDate={movie.release_date || '개봉일 정보 없음'}
