@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 10,
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '800',
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
