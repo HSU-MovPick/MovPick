@@ -215,7 +215,7 @@ export default function SelectPage() {
               />
               {/* 답변 버튼 */}
               <SelectButton
-                text="감성 풀충전"
+                text="감성 충전"
                 onPress={() => toggleSelection(selectedPurpose, setSelectedPurpose, 'emotional')}
                 selected={selectedPurpose === 'emotional'}
               />
