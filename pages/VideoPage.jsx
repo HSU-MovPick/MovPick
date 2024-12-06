@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { Dimensions, Image, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Dimensions, Image, FlatList, TouchableOpacity, ActivityIndicator, Linking } from 'react-native'; // Linking 추가
 import Background from '../shared/components/StandardBackground';
 import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 import axios from 'axios';
@@ -40,10 +40,10 @@ export default function VideoPage() {
         backgroundColor: "#C74659",
         padding: 10,
         borderRadius: 10,
-        width: screenWidth * 0.8, // 화면 너비의 90%로 설정
+        width: screenWidth * 0.8, // 화면 너비의 80%로 설정
         alignSelf: "center", // 중앙 정렬
       }}
-      onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${item.id.videoId}`)}
+      onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${item.id.videoId}`)} // YouTube 링크로 이동
     >
       <Image
         source={{ uri: item.snippet.thumbnails.medium.url }}
