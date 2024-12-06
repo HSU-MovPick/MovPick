@@ -18,7 +18,6 @@ import ChatbotChattingPage from './pages/ChatbotChattingPage';
 import SituationSelectResult from './pages/SituationSelectResult';
 import EmotionRecommendPic from './pages/EmotionRecommendPic';
 import EmotionRecommendResult from './pages/EmotionRecommendResult';
-import VideoPage from './pages/VideoPage';
 import { db } from './firebase'; // Firebase 초기화 파일 import
 
 const Stack = createStackNavigator();
@@ -52,7 +51,7 @@ function App() {
   return (
     <NavigationContainer>
       
-        <Stack.Navigator initialRouteName="Main"
+        <Stack.Navigator initialRouteName="Login"
         screenOptions={{ headerShown: false, animationEnabled: false }}>
             <Stack.Screen name="RecommendMain" component={RecommendMain} />
             <Stack.Screen name="EmotionRecommendMain" component={EmotionRecommendMain} />
@@ -61,7 +60,6 @@ function App() {
             <Stack.Screen name="SituationSelectResult" component={SituationSelectResult} />
             <Stack.Screen name="EmotionRecommendResult" component={EmotionRecommendResult}/>
             <Stack.Screen name="EmotionRecommendPic" component={EmotionRecommendPic} />
-            <Stack.Screen name="VideoPage" component={VideoPage} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Main" component={Main} />
             <Stack.Screen name="MovieList" component={MovieList} />

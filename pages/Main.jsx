@@ -9,9 +9,9 @@ import { useNavigation } from "@react-navigation/native";
 import FooterNavigationBar from "../shared/components/FooterNavigationBar";
 import { ScrollView, Image, TouchableOpacity, ActivityIndicator, Linking } from "react-native";
 import axios from "axios";
-import { GOOGLE_CLOUD_API_KEY } from "../config/google-cloud-api-key";
+import { GOOGLE_YOUTUBE_API_KEY } from "../config/google-cloud-api-key";
 
-const YOUTUBE_API_KEY = GOOGLE_CLOUD_API_KEY;
+const YOUTUBE_API_KEY = GOOGLE_YOUTUBE_API_KEY;
 const MOVIE_TITLE = "영화 예고편";
 
 export default function Main() {
