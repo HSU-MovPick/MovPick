@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 30, // 여백이 생길 때 둥근 모서리로
+    // borderRadius: 30, // 여백이 생길 때 둥근 모서리로
     overflow: 'hidden', // 모서리 둥글게 자르기
-    marginTop: 40, // 위쪽 여백
-    marginHorizontal: 15, // 좌우 여백
+    marginTop: 20, // 위쪽 여백
+    // marginHorizontal: 15, // 좌우 여백
   },
   overlay: {
     marginLeft: 10,
