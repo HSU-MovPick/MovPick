@@ -6,7 +6,9 @@ import RecommendMainButton from '../entities/RecommendMain/ui/RecommendMainButto
 import { useNavigation, Linking } from '@react-navigation/native';
 import FooterNavigationBar from '../shared/components/FooterNavigationBar';
 import axios from 'axios';
+import { GOOGLE_API_KEY } from '../config/keys';
 
+const YOUTUBE_API_KEY = GOOGLE_API_KEY;
 const MOVIE_TITLE = "Interstellar"; // 검색할 영화 제목
 
 // 영화 영상 페이지
