@@ -211,7 +211,9 @@ export default function EmotionRecommendPic() {
           <RecommnedFrame>
             <Intro>감정 기반 영화 추천을{'\n'}받아보세요</Intro>
             <EmoticonWrapper>
-              {selectedImage && <Emoticon source={{ uri: selectedImage }} />}
+            <Emoticon
+                source={selectedImage ? { uri: selectedImage } : defaultImageUri}
+              />
               <RecommendMainButton text="사진 업로드" onPress={selectImage} />
             </EmoticonWrapper>
             <ButtonWrapper>

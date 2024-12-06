@@ -8,8 +8,9 @@ import KakaoLogo from "../assets/kakaologo.png";
 import MainTicket from "../assets/mainticket.png";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KAKAO_REST_API_KEY } from "../config/kakao-api-key";
 
-const REST_API_KEY = "40a65c421ba8c4f7e8fed8a8937e3c77";
+const REST_API_KEY = KAKAO_REST_API_KEY;
 const REDIRECT_URI = "http://localhost:3000/oauth"; // 리디렉션 URI
 
 export default function Login({ navigation }) {
