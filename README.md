@@ -33,11 +33,38 @@
 5. **근처 영화관 찾기 및 상영 정보 제공**  
    사용자의 위치를 기반으로 가까운 영화관과 상영 중인 영화 정보를 제공합니다.  
    Google Maps API를 사용하여 구현되었습니다.
+   
+## 👥 팀원 소개 (Team Members) 👥  
 
-## 📽️ 데모 영상
+<table align="center">
+  <tr>
+    <th>김정은</th>
+    <th>김혜진</th>
+    <th>임혜정</th>
+    <th>한지운</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/jungeun-e.png" width="100"></td>
+    <td><img src="https://github.com/khyaejin.png" width="100"></td>
+    <td><img src="https://github.com/frombunny.png" width="100"></td>
+    <td><img src="https://github.com/Hjwoon.png" width="100"></td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/jungeun-e">@jungeun-e</a></td>
+    <td><a href="https://github.com/khyaejin">@khyaejin</a></td>
+    <td><a href="https://github.com/frombunny">@frombunny</a></td>
+    <td><a href="https://github.com/Hjwoon">@Hjwoon</a></td>
+  </tr>
+</table>
+
+## 🎨 역할 분담 🎨
+
+![역할분담](https://github.com/user-attachments/assets/11fbfaee-f5d5-477f-8798-9fbe39f3185c)
+
+
+## 📽️ 데모 영상 📽️
 
 [![Movpic Demo](https://img.youtube.com/vi/nCiwxNnZM9E/0.jpg)](https://youtu.be/nCiwxNnZM9E?si=LpiVlLBhLSf4Y1E2)
-
 
 ---
 
