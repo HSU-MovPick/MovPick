@@ -58,8 +58,7 @@
 </table>
 
 ## 🎨 역할 분담 🎨
-
-![역할분담](https://github.com/user-attachments/assets/67b7d183-d944-491f-aad0-ae330b527d97)
+![역할분담](https://github.com/user-attachments/assets/bdedd6b9-c021-44c9-9bc6-2547d5e6ffa2)
 
 
 ## 📽️ 데모 영상 📽️
