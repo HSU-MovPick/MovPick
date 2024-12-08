@@ -59,7 +59,7 @@
 
 ## 🎨 역할 분담 🎨
 
-![역할분담](https://github.com/user-attachments/assets/11fbfaee-f5d5-477f-8798-9fbe39f3185c)
+![역할분담](https://github.com/user-attachments/assets/67b7d183-d944-491f-aad0-ae330b527d97)
 
 
 ## 📽️ 데모 영상 📽️
